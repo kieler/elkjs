@@ -50,7 +50,6 @@ describe('Layout Options', function() {
     			'org.eclipse.elk.direction': 'DOWN'
     		},
 				callback: function(err, graph) {
-					console.log(err)
 					expect(err).to.be.null
 					assert(graph.properties['elk.direction'] == 'RIGHT')
 				  assert(Math.abs(graph.children[0].x - graph.children[1].x) > 0)

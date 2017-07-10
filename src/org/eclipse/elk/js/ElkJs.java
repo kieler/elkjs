@@ -110,6 +110,7 @@ public class ElkJs implements EntryPoint {
 
     private static LayoutConfigurator optsToCfg(final JSONObject opts) {
         LayoutConfigurator lc = new LayoutConfigurator();
+        lc.addFilter(LayoutConfigurator.NO_OVERWRITE);
         for (String key : opts.keySet()) {
             LayoutOptionData option = LayoutMetaDataService.getInstance().getOptionDataBySuffix(key);
             if (option != null) {
