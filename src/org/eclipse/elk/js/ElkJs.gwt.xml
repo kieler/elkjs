@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
+<module rename-to='elk'>
+
+  <!-- ELK -->
+  <inherits name="org.eclipse.elk.Elk" />
+  <!-- GWT -->
+  <inherits name='com.google.gwt.core.Core' />
+  <inherits name='com.google.gwt.json.JSON' />
+  <!-- Guava -->
+  <inherits name="com.google.common.collect.Collect" />
+  <!-- EMF -->
+  <inherits name="org.eclipse.emf.common.Common" />
+  <inherits name="org.eclipse.emf.ecore.Ecore" />
+  <!-- Xtend -->
+  <inherits name="org.eclipse.xtext.xbase.lib.Lib" />
+  <inherits name="org.eclipse.xtend.lib.Lib" />
+
+  <!-- Some properties must be set to generate just one permutation -->
+  <set-configuration-property name="user.agent.runtimeWarning" value="false"/>
+  <set-configuration-property name="document.compatMode.severity" value="IGNORE" />
+
+  <!-- Define and specify the linker -->
+  <define-linker name="nodejslinker" class="org.eclipse.elk.js.linker.NodeJsModuleLinker" />
+  <add-linker name="nodejslinker" />
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class="org.eclipse.elk.js.ElkJs" />
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path=''/>
+
+</module>

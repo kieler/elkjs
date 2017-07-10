@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<!-- list all elk required packages below 'org.eclipse.elk' -->
+	<source path="core"/>
+	<source path="graph"/>
+	<source path="alg"/>
+</module>
