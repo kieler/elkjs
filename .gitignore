@@ -1,6 +1,9 @@
-.gradle
-build
-gwt-unitCache
-node_modules
-lib
+.gradle/
+build/
+gwt-unitCache/
+node_modules/
+lib/
+bin/
 *.sublime-*
+.project
+org.eclipse.buildship.core.prefs

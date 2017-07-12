@@ -41,12 +41,16 @@ compileJava {
 ext.versions = [
   gwt:    '2.8.0',
   guava:  '21.0',
-  xtext:  '2.11.0',
+  xtext:  '2.12.0',
   melk:   '0.3.0-SNAPSHOT'
 ]
 
-def elkRepo    = '../elk'
-def emfGwtRepo = '../emfgwt'
+if (!hasProperty('elkRepo')) {
+	ext.elkRepo = '../elk'
+}
+if (!hasProperty('emfGwtRepo')) {
+	ext.emfGwtRepo = '../emfgwt'
+}
 
 def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.core/src",
@@ -60,8 +64,8 @@ def elkSources = [
 ]
 
 // the directory to which all sources are copied for compilation
-def srcDir = "$buildDir/src"
-def distDir = "./lib"
+def srcDir = "${buildDir}/src"
+def distDir = "${projectDir}/lib"
 
 def gwtModule = "org.eclipse.elk.js.ElkJs"
 
@@ -72,8 +76,6 @@ def gwtModule = "org.eclipse.elk.js.ElkJs"
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 repositories {
-    mavenCentral()
-    // for the xtext plugin
     jcenter()
     // for melk compiler
     maven {
@@ -89,8 +91,8 @@ sourceSets {
   emfGwt {
     java {
       srcDirs = [
-        "${emfGwtRepo}/emf-common",
-        "${emfGwtRepo}/emf-ecore",
+        "${emfGwtRepo}/emf-common/src/main/java",
+        "${emfGwtRepo}/emf-ecore/src/main/java",
       ]
     }
   }
