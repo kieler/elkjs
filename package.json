@@ -1,12 +1,12 @@
 {
   "name": "elkjs",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": {
     "name": "Ulf Rüegg",
     "email": "uru@informatik.uni-kiel.de"
   },
   "description": "Automatic graph layout based on Sugiyama's algorithm. Specialized for data flow diagrams and ports.",
-  "main": "lib/elk.min.js",
+  "main": "lib/main.js",
   "files": [
     "lib"
   ],
@@ -24,9 +24,19 @@
   "license": "EPL-1.0",
   "scripts": {
     "test": "mocha",
-    "build": "./gradlew lib"
+    "gradle": "./gradlew lib",
+    "babel": "babel src/js/ -d build/js/",
+    "browserifyApi": "browserify build/js/main-api.js -s ELK --outfile lib/elk-api.js",
+    "browserifyBundle": "browserify build/js/main-node.js -s ELK -i 'webworker-threads' --outfile lib/elk.bundled.js",
+    "browserify": "npm run browserifyApi && npm run browserifyBundle",
+    "cp": "cp build/js/elk-worker.*.js lib/ && cp build/js/main-node.js lib/main.js",
+    "js": "npm run babel && npm run browserify && npm run cp",
+    "build": "npm run gradle && npm run js"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "mocha": "^3.2.0"
   }

@@ -47,7 +47,19 @@ public class NodeJsModuleLinker extends AbstractLinker {
         out.print("   -------------- ");
         out.newline();
         // node provides most elements of a browser's window
-        out.print("var $wnd = global;");
+        out.print("var $wnd;");
+        out.newline();
+        out.print("if (typeof window !== 'undefined')");
+        out.newline();
+        out.print("    $wnd = window");
+        out.newline();
+        out.print("else if (typeof global !== 'undefined')");
+        out.newline();
+        out.print("    $wnd = global // nodejs");
+        out.newline();
+        out.print("else if (typeof self !== 'undefined')");
+        out.newline();
+        out.print("    $wnd = self // web worker");
         out.newline();
         out.newline();
 
@@ -73,7 +85,7 @@ public class NodeJsModuleLinker extends AbstractLinker {
         out.newline();
 
         // the filename of the resulting .js file
-        String filename = context.getModuleName() + ".js";
+        String filename = context.getModuleName() + "-worker.js";
         toReturn.add(emitString(logger, out.toString(), filename));
 
         return toReturn;

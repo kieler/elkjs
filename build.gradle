@@ -65,7 +65,7 @@ def elkSources = [
 
 // the directory to which all sources are copied for compilation
 def srcDir = "${buildDir}/src"
-def distDir = "${projectDir}/lib"
+def distDir = "${buildDir}/js"
 
 def gwtModule = "org.eclipse.elk.js.ElkJs"
 
@@ -244,7 +244,7 @@ task copyEmul(type: Copy) {
   from([
     // contains the implementation for json->elk graph importer
     // using gwt's json
-    "./src-emul"
+    "./src/java-additional"
   ])
   into "$srcDir/elk/"
 }
@@ -255,7 +255,7 @@ task copyMelk(type: Copy) {
 }
 
 task copyElkJs(type: Copy) {
-  from "./src"
+  from "./src/java"
   into "$srcDir/elkjs"
 }
 
