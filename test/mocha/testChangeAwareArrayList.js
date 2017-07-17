@@ -5,28 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-var assert = require('chai').assert
-var expect = require('chai').expect
-var elkjs = require('../lib/elk.js')
+var chai = require("chai");
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+chai.should();
+
+const ELK = require('../../lib/main.js')
+const elk = new ELK()
 
 describe('ChangeAwareArrayList', function() {
   describe('#layout()', function() {
 
-    it('should finish', function(done) {
+    it('should finish', function() {
       // the graph contains quite some edges, give the test
       // a little more time
-      this.timeout(4000);
-      elkjs.layout({
-          graph: graph,
-          callback: function(err, graph) {
-            expect(err).to.be.null
-            done()
-          }
-      });
+      this.timeout(5000);
+      return elk.layout(graph)
+        .should.eventually.be.fulfilled
+    })
 
-    });
-  });
-});
+  })
+})
 
 var graph =
   {
