@@ -195,5 +195,6 @@ Afterwards you can find the created files in the `lib` folder.
 * The team working on the layout algorithms
   * @spoenemann
   * @le-cds
+  * @uruuru
   * @eNBeWe
   * the vast number of students that contributed to ELK
