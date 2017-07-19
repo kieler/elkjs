@@ -190,11 +190,12 @@ Afterwards you can find the created files in the `lib` folder.
 
 # Thanks 
 
-* @automata for the very first `klayjs` version
-* @EyMaddis for valuable API discussions
+* [@automata](https://github.com/automata) for the very first `klayjs` version
+* [@aranega](https://github.com/aranega) for making emfgwt work for us
+* [@EyMaddis](https://github.com/EyMaddis) for valuable API discussions
 * The team working on the layout algorithms
-  * @spoenemann
-  * @le-cds
-  * @uruuru
-  * @eNBeWe
+  * [@spoenemann](https://github.com/spoenemann)
+  * [@le-cds](https://github.com/le-cds)
+  * [@uruuru](https://github.com/uruuru)
+  * [@eNBeWe](https://github.com/eNBeWe)
   * the vast number of students that contributed to ELK
