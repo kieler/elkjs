@@ -14,19 +14,19 @@ const ELK = require('../../lib/main.js')
 const elk = new ELK()
 
 describe('Parameters', function() {
-	describe('#layout()', function() {
+  describe('#layout()', function() {
 
     it('should be rejected if graph is missing', function() {
-			return elk.layout()
-			  .should.eventually.be.rejectedWith(Error)
+      return elk.layout()
+        .should.eventually.be.rejectedWith(Error)
     })
 
     it('should succeed if a graph is specified ', function() {
-    	return elk.layout({"id": 2})
-				.should.eventually.be.fulfilled
+      return elk.layout({"id": 2})
+        .should.eventually.be.fulfilled
     })
 
-		// TODO test options object for proper type
+    // TODO test options object for proper type
 
-	})
+  })
 })

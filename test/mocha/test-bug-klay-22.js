@@ -44,7 +44,7 @@ let globalLayoutOptions = {
 describe('klayjs#22', function() {
   describe('#layout(...)', function() {
 
-	  it('should place labels according to set options', function() {
+    it('should place labels according to set options', function() {
       return elk.layout(simpleGraph, {
         layoutOptions: globalLayoutOptions
       })

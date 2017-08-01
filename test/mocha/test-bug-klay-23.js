@@ -44,7 +44,7 @@ const simpleGraph = {
 describe('klayjs#23', function() {
   describe('#layout(...)', function() {
 
-	  it('should be fine with unspecified bendpoints', function() {
+    it('should be fine with unspecified bendpoints', function() {
       return elk.layout(simpleGraph)
         .should.eventually.be.fulfilled
     })
