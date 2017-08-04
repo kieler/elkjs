@@ -33,13 +33,15 @@
     "js": "npm run babel && npm run browserify && npm run cp",
     "build": "npm run gradle && npm run js"
   },
+  "dependencies" : {
+    "webworker-threads": "^0.7.12"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^3.2.0",
-    "webworker-threads": "^0.7.12"
+    "mocha": "^3.2.0"
   }
 }
