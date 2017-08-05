@@ -5,7 +5,9 @@ class ELKNode extends ELK {
     const optionsClone = Object.assign({}, options)
 
     if (options.workerUrl) {
-      const { Worker } = require('webworker-threads')
+      var codependency = require('codependency');
+      var requirePeer = codependency.register(module);
+      const { Worker } = requirePeer('webworker-threads')
       optionsClone.workerFactory = function (url) { return new Worker(url) }
     } else {
       const { Worker } = require('./elk-worker.min.js')

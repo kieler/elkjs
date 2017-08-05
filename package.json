@@ -33,8 +33,13 @@
     "js": "npm run babel && npm run browserify && npm run cp",
     "build": "npm run gradle && npm run js"
   },
+<<<<<<< HEAD
   "dependencies" : {
     "webworker-threads": "^0.7.12"
+=======
+  "dependencies" : { 
+    "codependency" : "^2.0.1"
+>>>>>>> master
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
