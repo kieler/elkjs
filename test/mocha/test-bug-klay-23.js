@@ -16,7 +16,7 @@ const elk = new ELK()
 
 const simpleGraph = {
   id: "root",
-  properties: { 
+  layoutOptions: { 
     'elk.algorithm': 'layered',
     'elk.layered.crossingMinimization.strategy': 'INTERACTIVE'
   },

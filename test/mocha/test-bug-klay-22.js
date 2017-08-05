@@ -24,7 +24,7 @@ const simpleGraph = {
       labels: [ { 
         id: "l2", 
         text: "Label2",
-        properties: {
+        layoutOptions: {
           'elk.nodeLabels.placement': 'INSIDE V_CENTER H_CENTER'
         } 
       }],

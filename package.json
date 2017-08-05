@@ -1,6 +1,6 @@
 {
   "name": "elkjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Ulf Rüegg",
     "email": "uru@informatik.uni-kiel.de"
@@ -23,7 +23,7 @@
   ],
   "license": "EPL-1.0",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/mocha",
     "gradle": "./gradlew lib",
     "babel": "babel src/js/ -d build/js/",
     "browserifyApi": "browserify build/js/main-api.js -s ELK --outfile lib/elk-api.js",

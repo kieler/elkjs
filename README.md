@@ -34,7 +34,7 @@ const elk = new ELK()
 
 const graph = {
   id: "root",
-  properties: { 'elk.algorithm': 'layered' },
+  layoutOptions: { 'elk.algorithm': 'layered' },
   children: [
     { id: "n1", width: 30, height: 30 },
     { id: "n2", width: 30, height: 30 },
@@ -51,18 +51,39 @@ elk.layout(graph)
    .catch(console.error)
 ```
 
+## Layout Options
+
 You can use _layout options_ to configure the layout algorithm.
-For that you atttach a `properties` obejct
-to the graph element that holds key/value pairs with the layout 
-options. See, for instance, `root` in the example above. 
+For that you attach a `layoutOptions` object
+to the graph element that holds key/value pairs 
+representing the desired layout options. 
+See, for instance, `root` in the example above. 
 It is possible to only use the suffix of a layout option: 
 `algorithm` instead of `org.eclipse.elk.layered`. 
 However, if the suffix is not unique the layout option 
-may be ignored. If you want to be save, you can start the
+may be ignored. To be save, you should always start the
 layout options with the `elk.` part.  
 A list of all options and further details of their exact effects 
 is available in [ELK's documentation](http://www.eclipse.org/elk/reference.html).
 
+It is possible to pass global layout options 
+as part of the `layout` method's second argument.
+The options are then applied to every graph element 
+unless the element specifies the option itself:
+```js
+elk.layout(graph, {
+  layoutOptions: { ... }
+})
+```
+
+Additionally, `ELK`'s constructor accepts an object 
+with layout options that is used with every 
+`layout` call that does not specify layout options:
+```js
+const elk = new ELK({
+  defaultLayoutOptions: { ... }
+})
+```
 
 # Usage
 
@@ -95,9 +116,15 @@ elk.layout(graph)
    .then(console.log)
 ```
 
-Note that node.js doesn't come with a Web Worker out of the box.
+Note that node.js doesn't come with a web worker out of the box.
 Thus, we have to use a library for it and selected `webworker-threads` as default.
 Any other library that provides the standard Web Worker methods should be fine though. 
+The package is not installed automatically to avoid 
+the unnecessary dependency for everyone who is not 
+interested in using a web worker.
+A warning is raised if one requests a web worker 
+without having installed the package.
+elkjs falls back to the non-Web Worker version in that case. 
 
 ## Browser
 
@@ -151,7 +178,7 @@ to construct it:
 * `new ELK(options)` - the `ELK` can be fed with options, all of which are optional:
   * `defaultLayoutOptions` - an object with default layout options specified as key/value pairs
         that are used if no further layout options are passed to the `layout(graph, options)` method (see below). Default: `{}`.
-  * `algorithms` - an array of algorithm ids (only the suffix). Default: `[ 'layered', 'stress', 'mrtree', 'radial', 'force' ]`.
+  * `algorithms` - an array of algorithm ids (only the suffix). Default: `[ 'layered', 'stress', 'mrtree', 'radial', 'force' ]`. Note that the `box`, `fixed`, and `random` layouters are always included.
   * `workerUrl` - a path to the  `elk-worker.js` script. As a consequence the `ELK` will use a Web Worker to execute the layout. Default: `undefined`.
 
 Apart from that the `ELK` offers the following methods:
@@ -178,8 +205,8 @@ that, in the Java world, would be retrieved from the [`LayoutMetaDataService`](h
 
 For building, a checkout of the [ELK](https://github.com/eclipse/elk) repository is required
 and should be located in the same directory as the checkout of this repository. 
-Currently, we also require a checkout of a particular branch 
-of the [emfgwt](https://github.com/Axellience/emfgwt) repository: `feature/check-2.12`.
+<!-- Currently, we also require a checkout of a particular branch 
+of the [emfgwt](https://github.com/Axellience/emfgwt) repository: `feature/check-2.12`. -->
 
 ```bash
 npm install
