@@ -5,11 +5,10 @@
   The dependencies are specified at the end of this file,
   not within the task definitions.
 
-  1) build emfgwt
-  2) copy (and preprocess) relevant source code
-  3) generate code for .melk and .xtend files
-  4) compile java source code
-  5) run gwt compiler
+  1) copy (and preprocess) relevant source code
+  2) generate code for .melk and .xtend files
+  3) compile java source code
+  4) run gwt compiler
 
   # Build directory layout
   src
@@ -39,17 +38,15 @@ compileJava {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ext.versions = [
+  emfGwt: '2.12.4',
   gwt:    '2.8.0',
   guava:  '21.0',
+  melk:   '0.3.0-SNAPSHOT',
   xtext:  '2.12.0',
-  melk:   '0.3.0-SNAPSHOT'
 ]
 
 if (!hasProperty('elkRepo')) {
 	ext.elkRepo = '../elk'
-}
-if (!hasProperty('emfGwtRepo')) {
-	ext.emfGwtRepo = '../emfgwt'
 }
 
 def elkSources = [
@@ -69,8 +66,6 @@ def distDir = "${buildDir}/js"
 
 def gwtModule = "org.eclipse.elk.js.ElkJs"
 
-
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            Repositories, Source Sets, and Dependencies
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -88,15 +83,6 @@ configurations {
 }
 
 sourceSets {
-  emfGwt {
-    java {
-      srcDirs = [
-        "${emfGwtRepo}/emf-common/src/main/java",
-        "${emfGwtRepo}/emf-ecore/src/main/java",
-      ]
-    }
-  }
-
   // compile xtext related sources. This includes:
   // xtend -> java
   // melk -> java
@@ -122,19 +108,10 @@ def gwtClasspath = [
       "$srcDir/xtend-gen",
       sourceSets.main.output.classesDir,
 
-      "${emfGwtRepo}/emf-common/src/main/java",
-      "${emfGwtRepo}/emf-ecore/src/main/java",
-      sourceSets.emfGwt.output.classesDir,
-
       configurations.gwt
     ]
 
 dependencies {
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  // for annotations, e.g. @GwtIncompatible, @DefaultMessage, and @Key
-  emfGwtCompile "com.google.gwt:gwt-user:$versions.gwt"
-
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // melk language
@@ -144,12 +121,18 @@ dependencies {
   xtextCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 
   xtextCompile "com.google.guava:guava:$versions.guava"
+
   xtextCompile "com.google.gwt:gwt-dev:$versions.gwt"
   xtextCompile "com.google.gwt:gwt-user:$versions.gwt"
-  xtextCompile files(sourceSets.emfGwt.output.classesDir)
+
+  xtextCompile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  xtextCompile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  // emf for gwt
+  compile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  compile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
   // guava
   compile "com.google.guava:guava:$versions.guava"
   // gwt
@@ -168,6 +151,9 @@ dependencies {
   gwt "com.google.gwt:gwt-user:$versions.gwt"
   //gwt "com.google.gwt:gwt-servlet:$versions.gwt"
 
+  gwt "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt:sources"
+  gwt "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt:sources"
+
   // the xtext/xtend gwt plugins only contain the '.gwt.xml' files
   // thus the source code has to be retrieved separately
   gwt "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext:sources"
@@ -175,11 +161,6 @@ dependencies {
   gwt "org.eclipse.xtext:org.eclipse.xtext.xbase.lib.gwt:$versions.xtext"
   gwt "org.eclipse.xtend:org.eclipse.xtend.lib.gwt:$versions.xtext"
 
-}
-
-// add the compiled emf-gwt to the classpath
-compileJava {
-  classpath += files(sourceSets.emfGwt.output.classesDir)
 }
 
 // configure the melk language
@@ -307,7 +288,6 @@ task lib(dependsOn: [ copyPretty, copyMinified ])
 //                      Task Dependencies
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-copyElk.dependsOn compileEmfGwtJava
 generateXtextXtext.dependsOn copyElk
 generateXtextXtext.dependsOn copyEmul
 copyMelk.dependsOn generateXtextXtext
