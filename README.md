@@ -15,6 +15,9 @@ elkjs is the successor of [klayjs](https://github.com/OpenKieler/klayjs).
 npm install elkjs
 ```
 
+# Releases and Versioning
+
+Releases are partly synchronized with ELK's versions: the minor version number is always the same but the revision number may diverge. For instance, elkjs 0.3.0 equals the functionality of ELK 0.3.0 but elkjs 0.3.2 may be different from ELK 0.3.2. This is necessary as there may be fixes that solely concern elkjs and should be released independently of ELK. 
 
 #  Files
 The library consists of two main files: 
@@ -178,7 +181,7 @@ to construct it:
 * `new ELK(options)` - the `ELK` can be fed with options, all of which are optional:
   * `defaultLayoutOptions` - an object with default layout options specified as key/value pairs
         that are used if no further layout options are passed to the `layout(graph, options)` method (see below). Default: `{}`.
-  * `algorithms` - an array of algorithm ids (only the suffix). Default: `[ 'layered', 'stress', 'mrtree', 'radial', 'force' ]`. Note that the `box`, `fixed`, and `random` layouters are always included.
+  * `algorithms` - an array of algorithm ids (only the suffix). Default: `[ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco' ]`. Note that the `box`, `fixed`, and `random` layouters are always included.
   * `workerUrl` - a path to the  `elk-worker.js` script. As a consequence the `ELK` will use a Web Worker to execute the layout. Default: `undefined`.
 
 Apart from that the `ELK` offers the following methods:
