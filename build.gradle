@@ -54,6 +54,7 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.graph/src",
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.common.compaction/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",

@@ -9,7 +9,7 @@ export default class ELK {
 
   constructor({
     defaultLayoutOptions = {},
-    algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force' ],
+    algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco' ],
     workerFactory,
     workerUrl
   } = {}) {
