@@ -9,7 +9,7 @@ export default class ELK {
 
   constructor({
     defaultLayoutOptions = {},
-    algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco' ],
+    algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco', 'sporeOverlap', 'sporeCompaction' ],
     workerFactory,
     workerUrl
   } = {}) {

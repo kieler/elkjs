@@ -53,12 +53,13 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.core/src",
   "${elkRepo}/plugins/org.eclipse.elk.graph/src",
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
-  "${elkRepo}/plugins/org.eclipse.elk.alg.common.compaction/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.common/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
-  "${elkRepo}/plugins/org.eclipse.elk.alg.radial/src"
+  "${elkRepo}/plugins/org.eclipse.elk.alg.radial/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.spore/src"
 ]
 
 // the directory to which all sources are copied for compilation
@@ -208,6 +209,9 @@ task copyElk(type: Copy) {
   exclude "**/ElkGraphXMIHelper.java"
   exclude "**/ElkGraphXMISave.java"
   exclude "**/ElkGraphResourceFactory.java"
+
+  // incompatible api, an emulating class is used (java-additional)
+  exclude "**/alg/common/utils/SVGImage.java"
 
   // after copying, remove those parts of the code
   // that have been marked to be incompatible with gwt

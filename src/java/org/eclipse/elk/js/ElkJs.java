@@ -27,6 +27,7 @@ import org.eclipse.elk.alg.layered.options.*;
 import org.eclipse.elk.alg.force.options.*;
 import org.eclipse.elk.alg.mrtree.options.*;
 import org.eclipse.elk.alg.radial.options.*;
+import org.eclipse.elk.alg.spore.options.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -140,6 +141,8 @@ public class ElkJs implements EntryPoint {
                 SERVICE.registerLayoutMetaDataProviders(new RadialMetaDataProvider());
             } else if (alg.equals("disco")) {
                 SERVICE.registerLayoutMetaDataProviders(new PolyominoOptions(), new DisCoMetaDataProvider());
+            } else if (alg.equals("sporeOverlap") || alg.equals("sporeCompaction")) {
+                SERVICE.registerLayoutMetaDataProviders(new SporeMetaDataProvider());
             }
         }
     }
