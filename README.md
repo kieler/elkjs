@@ -8,7 +8,7 @@ Note that elkjs is not a diagramming framework itself - it computes positions fo
 
 elkjs is the successor of [klayjs](https://github.com/OpenKieler/klayjs). 
 
-![](./doc/screenshot.png)
+![](https://raw.githubusercontent.com/OpenKieler/elkjs/master/doc/example_complexRouter.svg?sanitize=true)
 
 # Installation
 ```bash
