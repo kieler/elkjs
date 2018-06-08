@@ -4,7 +4,7 @@
 The [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/) implements an infrastructure to connect diagram editors or viewers to automatic layout algorithms. This library takes the layout-relevant part of ELK and makes it available to the JavaScript world. 
 ELK's flagship is a layer-based layout algorithm that is particularly suited for node-link diagrams with an inherent direction and ports (explicit attachment points on a node's border). It is based on the ideas originally introduced by Sugiyama et al. An example can be seen in the screenshot below. 
 
-Note that elkjs is not a diagramming framework itself - it computes positions for the elements of a diagrams. You can see it [live in action](https://rtsys.informatik.uni-kiel.de/elklive/) in conjunction with TypeFox's [sprotty](https://github.com/theia-ide/sprotty) diagramming framework. 
+Note that elkjs is not a diagramming framework itself - it computes positions for the elements of a diagram. You can see it [live in action](https://rtsys.informatik.uni-kiel.de/elklive/) in conjunction with TypeFox's [sprotty](https://github.com/theia-ide/sprotty) diagramming framework. 
 
 elkjs is the successor of [klayjs](https://github.com/OpenKieler/klayjs). 
 
