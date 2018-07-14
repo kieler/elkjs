@@ -18,8 +18,8 @@
    +-- xtend-gen
 */
 plugins {
-  id 'org.xtext.builder' version '1.0.17'
-  id 'org.xtext.xtend'   version '1.0.17'
+  id 'org.xtext.builder' version '1.0.21'
+  id 'org.xtext.xtend'   version '1.0.21'
   id 'java'
 }
 
@@ -41,7 +41,7 @@ ext.versions = [
   emfGwt: '2.12.4',
   gwt:    '2.8.0',
   guava:  '21.0',
-  melk:   '0.3.0-SNAPSHOT',
+  melk:   '0.4.0-SNAPSHOT',
   xtext:  '2.12.0',
 ]
 
