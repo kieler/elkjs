@@ -207,9 +207,13 @@ that, in the Java world, would be retrieved from the [`LayoutMetaDataService`](h
 # Building
 
 For building, a checkout of the [ELK](https://github.com/eclipse/elk) repository is required
-and should be located in the same directory as the checkout of this repository. 
-<!-- Currently, we also require a checkout of a particular branch 
-of the [emfgwt](https://github.com/Axellience/emfgwt) repository: `feature/check-2.12`. -->
+and should be located in the same directory as the checkout of this repository. Like so:
+
+```
+some_dir/
+ ├── elkjs
+ └── elk
+```
 
 ```bash
 npm install
