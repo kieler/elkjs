@@ -41,8 +41,8 @@ ext.versions = [
   emfGwt: '2.12.4',
   gwt:    '2.8.0',
   guava:  '21.0',
-  melk:   '0.5.0-SNAPSHOT',
-  xtext:  '2.12.0',
+  melk:   '0.5.0',
+  xtext:  '2.16.0',
 ]
 
 if (!hasProperty('elkRepo')) {
@@ -50,14 +50,17 @@ if (!hasProperty('elkRepo')) {
 }
 
 def elkSources = [
+  // The core and graph format
   "${elkRepo}/plugins/org.eclipse.elk.core/src",
   "${elkRepo}/plugins/org.eclipse.elk.graph/src",
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.common/src",
+  // The algorithms
   "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
-  "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.packing.rectangles/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.radial/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.spore/src"
 ]

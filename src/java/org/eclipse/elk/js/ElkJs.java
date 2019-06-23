@@ -28,6 +28,7 @@ import org.eclipse.elk.alg.force.options.*;
 import org.eclipse.elk.alg.mrtree.options.*;
 import org.eclipse.elk.alg.radial.options.*;
 import org.eclipse.elk.alg.spore.options.*;
+import org.eclipse.elk.alg.packing.rectangles.options.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -98,7 +99,7 @@ public class ElkJs implements EntryPoint {
             // let it look like a regular message (add the 'data' key)
             function FakeWorker(url) {
                 var _this = this;
-                
+
                 // post messages
                 this.dispatcher = new Dispatcher({
                     postMessage: function(msg) { _this.onmessage({ data: msg }) }
@@ -143,6 +144,8 @@ public class ElkJs implements EntryPoint {
                 SERVICE.registerLayoutMetaDataProviders(new PolyominoOptions(), new DisCoMetaDataProvider());
             } else if (alg.equals("sporeOverlap") || alg.equals("sporeCompaction")) {
                 SERVICE.registerLayoutMetaDataProviders(new SporeMetaDataProvider());
+            } else if (alg.equals("rectPacking")) {
+                SERVICE.registerLayoutMetaDataProviders(new RectPackingMetaDataProvider());
             }
         }
     }
