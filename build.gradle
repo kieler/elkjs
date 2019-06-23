@@ -108,7 +108,7 @@ def gwtClasspath = [
       "$srcDir/elkjs",
       "$srcDir/melk",
       "$srcDir/xtend-gen",
-      sourceSets.main.output.classesDir,
+      sourceSets.main.output.classesDirs,
 
       configurations.gwt
     ]
@@ -251,7 +251,7 @@ task copyElkJs(type: Copy) {
 
 def gwtInputs = [
   fileTree(srcDir),
-  fileTree(sourceSets.main.output.classesDir)
+  sourceSets.main.output.classesDirs
 ]
 
 task gwtc (type: JavaExec) {
