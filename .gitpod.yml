@@ -1,0 +1,9 @@
+tasks:
+- init: |
+    git clone https://github.com/eclipse/elk.git ../elk
+    cd ../elk
+    eval $(gp env -e)
+    git checkout ${elk_version:=master}
+    cd ../elkjs
+    npm install
+    npm run build
