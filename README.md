@@ -222,6 +222,11 @@ npm install
 npm run build
 ```
 
+For a new release, the following version numbers have to be changed:
+* `version` in `package.json`,
+* `melk` in `build.gradle`, and
+* don't forget to checkout the correct release tag of ELK's repository.
+
 Afterwards you can find the created files in the `lib` folder.
 
 # Thanks
