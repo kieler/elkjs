@@ -70,7 +70,7 @@ public class ElkJs implements EntryPoint {
                         worker.postMessage({ id: data.id })
                         break
                     case 'layout':
-                        @org.eclipse.elk.js.ElkJs::layout(*)(data.graph, data.options || {})
+                        @org.eclipse.elk.js.ElkJs::layout(*)(data.graph, data.layoutOptions || {}, data.options || {})
                         worker.postMessage({ id: data.id, data: data.graph })
                         break
                 }
@@ -150,7 +150,9 @@ public class ElkJs implements EntryPoint {
         }
     }
 
-    public static void layout(final JavaScriptObject graphObj, final JavaScriptObject optionsObj) {
+    public static void layout(final JavaScriptObject graphObj,
+                              final JavaScriptObject layoutOptionsObj,
+                              final JavaScriptObject optionsObj) {
         // graph must exist
         JSONObject graph = new JSONObject(graphObj).isObject();
 
@@ -160,18 +162,87 @@ public class ElkJs implements EntryPoint {
         ElkNode elkGraph = importer.transform(graph);
 
         // apply global layout options
-        if (optionsObj != null) {
+        if (layoutOptionsObj != null) {
             // must be object
-            JSONObject options = new JSONObject(optionsObj).isObject();
+            JSONObject options = new JSONObject(layoutOptionsObj).isObject();
             LayoutConfigurator lc = optsToCfg(options);
             ElkUtil.applyVisitors(elkGraph, lc);
         }
 
-        new RecursiveGraphLayoutEngine().layout(elkGraph, new BasicProgressMonitor());
+        // check whether logging and/or execution time measurement shall be enabled
+        boolean recordLogs = false;
+        boolean recordExecutionTime = false;
+        if (optionsObj != null) {
+            JSONObject options = new JSONObject(optionsObj).isObject();
+            if (options.containsKey("logging")) {
+                recordLogs = options.get("logging").isBoolean().booleanValue();
+            }
+            if (options.containsKey("measureExecutionTime")) {
+                recordExecutionTime = options.get("measureExecutionTime").isBoolean().booleanValue();
+            }
+        }
 
+        // perform the layout
+        final BasicProgressMonitor pm = new BasicProgressMonitor()
+                                                .withLogging(recordLogs)
+                                                .withExecutionTimeMeasurement(recordExecutionTime);
+        new RecursiveGraphLayoutEngine().layout(elkGraph, pm);
+
+        // record the logs, possibly cleaning any old logging information
+        if (graph.containsKey("logging")) {
+            graph.put("logging", null);
+        }
+        if (recordLogs || recordExecutionTime) {
+            JSONObject logs = new JSONObject();
+            collectLogs(pm, logs, recordLogs, recordExecutionTime);
+            graph.put("logging", logs);
+        }
+
+        // transfer the computed layout to the input graph
         importer.transferLayout(elkGraph);
 
         // layout done, callback is called in js code
+    }
+
+    public static void collectLogs(final IElkProgressMonitor currentPM,
+                                   final JSONObject logObject,
+                                   final boolean recordLogs,
+                                   final boolean recordExecutionTime) {
+
+        // Set the name
+        final JSONString jsonTaskName = new JSONString(currentPM.getTaskName());
+        logObject.put("name", jsonTaskName);
+
+        // Collect the logs of the current progress monitor
+        if (recordLogs && !currentPM.getLogs().isEmpty()) {
+            final JSONArray jsonLogs = new JSONArray();
+            logObject.put("logs", jsonLogs);
+            int i = 0;
+            for (final String s : currentPM.getLogs()) {
+                final JSONString jsonString = new JSONString(s);
+                jsonLogs.set(i, jsonString);
+                i++;
+            }
+        }
+
+        // Record the execution time of the current progress monitor
+        if (recordExecutionTime) {
+            final JSONNumber jsonExecTime = new JSONNumber(currentPM.getExecutionTime());
+            logObject.put("executionTime", jsonExecTime);
+        }
+
+        // And process any child progress monitors
+        if (!currentPM.getSubMonitors().isEmpty()) {
+            final JSONArray children = new JSONArray();
+            logObject.put("children", children);
+            int i = 0;
+            for (final IElkProgressMonitor child : currentPM.getSubMonitors()) {
+                JSONObject jsonChild = new JSONObject();
+                children.set(i, jsonChild);
+                collectLogs(child, jsonChild, recordLogs, recordExecutionTime);
+                i++;
+            }
+        }
     }
 
     public static JavaScriptObject getLayoutAlgorithms() {
