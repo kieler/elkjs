@@ -1,9 +1,9 @@
 {
   "name": "elkjs",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "author": {
     "name": "Ulf Rüegg",
-    "email": "uru@informatik.uni-kiel.de"
+    "email": "uruurumail@gmail.com"
   },
   "description": "Automatic graph layout based on Sugiyama's algorithm. Specialized for data flow diagrams and ports.",
   "main": "lib/main",
