@@ -1,0 +1,23 @@
+# To allow switching the jdk, we use the java language as base
+language: java
+
+jdk:
+  # Java 8 required by GWT
+  - openjdk8
+
+env:
+  # As we use the java language, manually set the node version
+  - NODE_VERSION=10
+
+install:
+  - git clone https://github.com/eclipse/elk.git ../elk
+  - cd ../elk
+  - git checkout ${elk_version:=master}
+  - cd ../elkjs
+  - nvm install $NODE_VERSION
+  - npm install
+  - npm run build
+
+script:
+  - nvm use $NODE_VERSION
+  - npm run test
