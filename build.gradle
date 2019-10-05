@@ -47,7 +47,7 @@ if (JavaVersion.current() != JavaVersion.VERSION_1_8){
 
 ext.versions = [
   emfGwt: '2.12.4',
-  gwt:    '2.8.0',
+  gwt:    '2.8.2',
   guava:  '21.0',
   melk:   '0.6.0-SNAPSHOT',
   xtext:  '2.16.0',
