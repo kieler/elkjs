@@ -33,6 +33,14 @@ compileJava {
   targetCompatibility = 1.8
 }
 
+// GWT requires to be run with Java 8
+//  (Note there's support for running it with Java 9 but it's limited,
+//   See release notes of the current version 2.8.2:
+//   http://www.gwtproject.org/release-notes.html)
+if (JavaVersion.current() != JavaVersion.VERSION_1_8){
+    throw new GradleException("elkjs build requires to be run with Java 8 (due to GWT compilation).")
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //                         Settings
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
