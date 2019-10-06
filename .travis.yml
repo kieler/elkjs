@@ -21,3 +21,9 @@ install:
 script:
   - nvm use $NODE_VERSION
   - npm run test
+
+notifications:
+  email:
+    recipients:
+      - uruurumail@gmail.com
+      - cds@informatik.uni-kiel.de
