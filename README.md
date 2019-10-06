@@ -190,8 +190,8 @@ Apart from that the `ELK` offers the following methods:
   * `options` - a configuration object. Optional.
     * `layoutOptions`: its most important purpose is to pass _global_ layout options.
       That is, layout options that are applied to every graph element unless the element specifies the option itself.
-    * `logging`: boolean. Whether logging information shall be passed back as part of the laid out graph.
-    * `measureExecutionTime`: boolean. Whether execution time (in seconds) information shall be passed back as part of the laid out graph.
+    * `logging`: boolean (_since 0.6.0_). Whether logging information shall be passed back as part of the laid out graph.
+    * `measureExecutionTime`: boolean (_since 0.6.0_). Whether execution time (in seconds) information shall be passed back as part of the laid out graph.
   * returns a `Promise`, which passes either the laid out graph on success or a (hopefully helpful) error on failure.
 * `knownLayoutOptions()`
   * returns an array of of known layout options. For each options additional information
@@ -208,6 +208,8 @@ that, in the Java world, would be retrieved from the [`LayoutMetaDataService`](h
 
 
 # Logging and Execution Times
+(_Since 0.6.0_)
+
 ELK provides some means to log debug information during layout algorithm execution.
 The details can be found in the [_Algorithm Debugging_](https://www.eclipse.org/elk/documentation/algorithmdevelopers/algorithmdebugging.html) section of ELK's documentation.
 Not all of it is available in elkjs though, for instance, it is not possible to save intermediate results of the laid out graphs.
@@ -217,7 +219,7 @@ Note that the returned execution times are in seconds.
 For small graphs this may often result in execution times being reported as `0`.
 
 See below an example call and the example output.
-```
+```js
 elk.layout(simpleGraph, {
     layoutOptions: {
         'algorithm': 'layered'
@@ -226,7 +228,7 @@ elk.layout(simpleGraph, {
     measureExecutionTime: true
 })
 ```
-```
+```json
 {
   "id": "root",
   "children": [ ... ],
