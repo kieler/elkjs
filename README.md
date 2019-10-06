@@ -228,7 +228,7 @@ elk.layout(simpleGraph, {
     measureExecutionTime: true
 })
 ```
-```json
+```js
 {
   "id": "root",
   "children": [ ... ],
