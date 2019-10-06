@@ -55,14 +55,22 @@ export default class ELK {
       .catch(console.err)
   }
 
-  layout(graph, { layoutOptions = this.defaultLayoutOptions } = {}) {
+  layout(graph, {
+      layoutOptions = this.defaultLayoutOptions,
+      logging = false,
+      measureExecutionTime = false,
+  } = {}) {
     if (!graph) {
       return Promise.reject(new Error("Missing mandatory parameter 'graph'."))
     }
     return this.worker.postMessage({
       cmd: 'layout',
       graph: graph,
-      options: layoutOptions
+      layoutOptions: layoutOptions,
+      options: {
+          logging: logging,
+          measureExecutionTime: measureExecutionTime,
+      }
     })
   }
 

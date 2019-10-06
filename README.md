@@ -187,8 +187,11 @@ to construct it:
 Apart from that the `ELK` offers the following methods:
 * `layout(graph, options)`
   * `graph` - the graph to be laid out in [ELK JSON](http://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html). Mandatory!
-  * `options` - a configuration object. Currently its sole purpose is to pass _global_ layout options.
-    That is, layout options that are applied to every graph element unless the element specifies the option itself. Optional.
+  * `options` - a configuration object. Optional.
+    * `layoutOptions`: its most important purpose is to pass _global_ layout options.
+      That is, layout options that are applied to every graph element unless the element specifies the option itself.
+    * `logging`: boolean. Whether logging information shall be passed back as part of the laid out graph.
+    * `measureExecutionTime`: boolean. Whether execution time (in seconds) information shall be passed back as part of the laid out graph.
   * returns a `Promise`, which passes either the laid out graph on success or a (hopefully helpful) error on failure.
 * `knownLayoutOptions()`
   * returns an array of of known layout options. For each options additional information
@@ -203,6 +206,50 @@ Apart from that the `ELK` offers the following methods:
 The three methods starting with `known` basically return information
 that, in the Java world, would be retrieved from the [`LayoutMetaDataService`](http://www.eclipse.org/elk/documentation/algorithmdevelopers/metadatalanguage.html).
 
+
+# Logging and Execution Times
+ELK provides some means to log debug information during layout algorithm execution.
+The details can be found in the [_Algorithm Debugging_](https://www.eclipse.org/elk/documentation/algorithmdevelopers/algorithmdebugging.html) section of ELK's documentation.
+Not all of it is available in elkjs though, for instance, it is not possible to save intermediate results of the laid out graphs.
+Furthermore, while internally execution time is measured in _nanoseconds_ on the Java side,
+in elkjs we have to resort to _milliseconds_.
+Note that the returned execution times are in seconds.
+For small graphs this may often result in execution times being reported as `0`.
+
+See below an example call and the example output.
+```
+elk.layout(simpleGraph, {
+    layoutOptions: {
+        'algorithm': 'layered'
+    },
+    logging: true,
+    measureExecutionTime: true
+})
+```
+```
+{
+  "id": "root",
+  "children": [ ... ],
+  "edges": [ ... ],
+  "logging": {
+    "name": "Recursive Graph Layout",
+    "executionTime": 0.000096,
+    "children": [ {
+      "name": "Layered layout",
+      "logs": [
+        "ELK Layered uses the following 17 modules:",
+        "   Slot 01: org.eclipse.elk.alg.layered.p1cycles.GreedyCycleBreaker",
+            [ ... ]
+        "   Slot 16: org.eclipse.elk.alg.layered.intermediate.ReversedEdgeRestorer"
+      ],
+      "executionTime": 0.000072,
+      "children": [ { "name": "Greedy cycle removal", "executionTime": 0.000002 },
+                      [ ... ]
+                    { "name": "Restoring reversed edges", "executionTime": 0 } ]
+    } ]
+  }
+}
+```
 
 # Building
 
