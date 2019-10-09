@@ -38,6 +38,6 @@ const graph = {
     { id: "e1", sources: [ "n1" ], targets: [ "n2" ] },
     { id: "e2", sources: [ "n1" ], targets: [ "n3" ] },
     // this selfloop yields a stack overflow for <= 0.4.1
-    { id: "e2", sources: [ "n1" ], targets: [ "n1" ] }
+    { id: "e3", sources: [ "n1" ], targets: [ "n1" ] }
   ]
 }
