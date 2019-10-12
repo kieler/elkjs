@@ -11,8 +11,13 @@ elkjs is the successor of [klayjs](https://github.com/OpenKieler/klayjs).
 ![](https://raw.githubusercontent.com/OpenKieler/elkjs/master/doc/example_complexRouter.svg?sanitize=true)
 
 # Installation
+The latest released version:
 ```bash
 npm install elkjs
+```
+Development version based on ELK's `master` branch.
+```bash
+npm install elkjs@next
 ```
 
 # Releases and Versioning
