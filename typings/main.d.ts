@@ -64,12 +64,39 @@ declare module "elkjs/lib/elk-api" {
         outgoingSections?: string[]
     }
 
-    export interface ELKLayoutArguments {
+    export interface ElkLayoutArguments {
         layoutOptions?: LayoutOptions
+        logging?: boolean
+        measureExecutionTime?: boolean
+    }
+
+    export interface ElkCommonDescription {
+        id?: string
+        name?: string
+        description?: string
+    }
+
+    export interface ElkLayoutAlgorithmDescription extends ElkCommonDescription {
+        category?: string
+        knownOptions?: string[]
+        supportedFeatures?: string[]
+    }
+
+    export interface ElkLayoutOptionDescription extends ElkCommonDescription {
+        group?: string
+        type?: string
+        targets?: string[]
+    }
+
+    export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
+        knownLayouters?: string[]
     }
 
     export interface ELK {
-        layout(graph: ElkNode, args?: ELKLayoutArguments): Promise<ElkNode>;
+        layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
+        knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription>
+        knownLayoutOptions(): Promise<ElkLayoutOptionDescription>
+        knownLayoutCategories(): Promise<ElkLayoutCategoryDescription>
     }
 
     export interface ELKConstructorArguments {

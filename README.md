@@ -198,11 +198,11 @@ Apart from that the `ELK` offers the following methods:
   * `options` - a configuration object. Optional.
     * `layoutOptions`: its most important purpose is to pass _global_ layout options.
       That is, layout options that are applied to every graph element unless the element specifies the option itself.
-    * `logging`: boolean (_since 0.6.0_). Whether logging information shall be passed back as part of the laid out graph.
-    * `measureExecutionTime`: boolean (_since 0.6.0_). Whether execution time (in seconds) information shall be passed back as part of the laid out graph.
+    * `logging`: boolean (_since 0.6.0_). Whether logging information shall be passed back as part of the laid out graph. `false` by default.
+    * `measureExecutionTime`: boolean (_since 0.6.0_). Whether execution time (in seconds) information shall be passed back as part of the laid out graph. `false` by default.
   * returns a `Promise`, which passes either the laid out graph on success or a (hopefully helpful) error on failure.
 * `knownLayoutOptions()`
-  * returns an array of of known layout options. For each options additional information
+  * returns an array of of known layout options. For each option additional information
     such as its `id` and `group` is given.
 * `knownLayoutAlgorithms()`
   * returns an array of registered layout algorithms (see above)
