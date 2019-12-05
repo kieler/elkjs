@@ -33,7 +33,8 @@
     "cp": "cp build/js/elk-worker*.js lib/ && cp build/js/main-node.js lib/main.js && cp typings/*.d.ts lib/",
     "js": "npm run babel && npm run browserify && npm run cp",
     "build": "npm run gradle && npm run js",
-    "clean": "./gradlew clean && rm -r lib"
+    "clean": "./gradlew clean && rm -r lib",
+    "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
