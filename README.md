@@ -61,6 +61,8 @@ elk.layout(graph)
    .then(console.log)
    .catch(console.error)
 ```
+Note that in case you get errors, you may want to switch to the non-minified version 
+to get a proper stack trace.
 
 ## Layout Options
 
@@ -181,6 +183,18 @@ const elk = new ELK({
 })
 ```
 
+## Debugging
+For debugging purposes you may want to use the non-minified versions that are available as well.
+In this case the non-minified webworker version can be configured like so:
+```js
+const ELK = require('elkjs/lib/elk-api.js')
+const elk = new ELK({
+    workerFactory: function(url) { // the value of 'url' is irrelevant here
+        const { Worker } = require('elkjs/lib/elk-worker.js') // non-minified
+        return new Worker(url)
+    }
+})
+```
 
 # API
 
