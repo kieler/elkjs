@@ -117,6 +117,7 @@ class PromisedWorker {
       // prepare the resolver
       self.resolvers[id] = function (err, res) {
         if (err) {
+          self.convertGwtStyleError(err)
           reject(err)
         } else {
           resolve(res)
@@ -145,5 +146,24 @@ class PromisedWorker {
       this.worker.terminate()
     }
   }
-
+  
+  convertGwtStyleError(err) {
+    if (!err) {
+      return
+    }
+    // Somewhat flatten the way GWT stores nested exception(s)
+    let javaException = err['__java$exception']
+    if (javaException) {
+      // Note that the property name of the nested exception is different
+      // in the non-minified ('cause') and the minified (not deterministic) version.
+      // Hence, the version below only works for the non-minified version.
+      // However, as the minified stack trace is not of much use anyway, one
+      // should switch the used version for debugging in such a case.
+      if (javaException.cause && javaException.cause.backingJsObject) {
+        err.cause = javaException.cause.backingJsObject
+        this.convertGwtStyleError(err.cause)
+      }
+      delete err['__java$exception']
+    }
+  }  
 }

@@ -80,9 +80,7 @@ public class ElkJs implements EntryPoint {
                 try {
                     _this.dispatch(event)
                 } catch (err) {
-                    delete err['__java$exception']
-                    // TODO turn the error into a proper json object
-                    worker.postMessage({ id: event.data.id, error: err.message })
+                    worker.postMessage({ id: event.data.id, error: err })
                 }
             }
         }
