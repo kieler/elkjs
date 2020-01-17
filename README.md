@@ -300,6 +300,19 @@ For a new release, the following version numbers have to be changed:
 
 Afterwards you can find the created files in the `lib` folder.
 
+Current procedure
+```bash
+git checkout -b releases/0.x.x
+# Update versions and commit the changes
+npm install
+npm run build
+npm run test
+# Add ./lib/ directory and commit
+git tag 0.x.x
+# Push release branch an tags to remote
+npm publish
+```
+
 # Thanks
 
 * [@automata](https://github.com/automata) for the very first `klayjs` version
