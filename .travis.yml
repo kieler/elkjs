@@ -27,10 +27,3 @@ notifications:
     recipients:
     - uruurumail@gmail.com
     - cds@informatik.uni-kiel.de
-
-deploy:
-  provider: npm
-  email: $NPM_USER
-  api_key: $NPM_AUTH_TOKEN
-  tag: next
-  skip_cleanup: true
