@@ -27,3 +27,5 @@ notifications:
     recipients:
     - uruurumail@gmail.com
     - cds@informatik.uni-kiel.de
+    on_success: change
+    on_failure: always
