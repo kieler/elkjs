@@ -124,6 +124,34 @@ describe('Layout Options', function() {
         })
     })
 
+    it('should raise an exception for an invalid layouter id', function() {
+      let graph = {
+        id: "root",
+        children: [{ id: "n1", width: 10, height: 10 }],
+        layoutOptions: { algorithm: "foo.bar.baz" }
+      }
+      return elk.layout(graph)
+        .should.eventually.be.rejectedWith(Error)
+        .and.eventually.have.property('message')
+        .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedConfigurationException") !== -1)
+    })
+    
+    it('should default to elk.layered if no layouter has been specified', function() {
+      let graph = {
+        id: "root",
+        children: [{ id: "n1", width: 10, height: 10 }],
+        layoutOptions: { }
+      }
+      return elk.layout(graph)
+        .should.eventually.be.fulfilled
+        // Note that the following does not work as the resolved layout algorithm
+        // is stored in an internal property within ELK that is not exposed after layout.
+        // Hence, we have to be happy with this test case not raising an exception
+        //.and.eventually.have.property('layoutOptions')
+        //.that.has.property('algorithm')
+        //.that.is.equal.to('org.eclipse.elk.layered');
+    })
+    
   })
 })
 

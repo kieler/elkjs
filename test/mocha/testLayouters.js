@@ -65,7 +65,7 @@ describe('Layout Algorithms', function() {
   it('Rectangle Packing', function() {
     return elk.layout(graphOverlapping, {
       layoutOptions: {
-        'algorithm': 'elk.rectPacking'
+        'algorithm': 'elk.rectpacking.rectPacking'
       }
     }).should.eventually.be.fulfilled
   })
