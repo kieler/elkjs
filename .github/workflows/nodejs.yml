@@ -1,6 +1,6 @@
 name: elkjs CI
 
-on: [push]
+on: [push, repository_dispatch]
 
 jobs:
   build:
