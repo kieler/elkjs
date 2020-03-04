@@ -124,6 +124,7 @@ describe('Layout Options', function() {
         })
     })
 
+    /** Not included in ELK 0.6.1
     it('should raise an exception for an invalid layouter id', function() {
       let graph = {
         id: "root",
@@ -134,7 +135,7 @@ describe('Layout Options', function() {
         .should.eventually.be.rejectedWith(Error)
         .and.eventually.have.property('message')
         .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedConfigurationException") !== -1)
-    })
+    })*/
     
     it('should default to elk.layered if no layouter has been specified', function() {
       let graph = {
