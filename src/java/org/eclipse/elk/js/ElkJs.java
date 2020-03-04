@@ -28,7 +28,7 @@ import org.eclipse.elk.alg.force.options.*;
 import org.eclipse.elk.alg.mrtree.options.*;
 import org.eclipse.elk.alg.radial.options.*;
 import org.eclipse.elk.alg.spore.options.*;
-import org.eclipse.elk.alg.packing.rectangles.options.*;
+import org.eclipse.elk.alg.rectpacking.options.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

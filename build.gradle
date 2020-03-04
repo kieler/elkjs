@@ -68,7 +68,7 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
-  "${elkRepo}/plugins/org.eclipse.elk.alg.packing.rectangles/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.rectpacking/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.radial/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.spore/src"
 ]
