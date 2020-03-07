@@ -1,6 +1,10 @@
 name: elkjs CI
 
-on: [push, repository_dispatch]
+on: 
+  push:
+  repository_dispatch:
+  schedule:
+    - cron:  '0 3 * * *'
 
 jobs:
   build:
