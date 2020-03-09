@@ -50,7 +50,7 @@ ext.versions = [
   gwt:    '2.8.2',
   guava:  '21.0',
   melk:   '0.7.0-SNAPSHOT',
-  xtext:  '2.16.0',
+  xtext:  '2.20.0',
 ]
 
 if (!hasProperty('elkRepo')) {
