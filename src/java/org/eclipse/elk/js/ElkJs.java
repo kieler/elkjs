@@ -146,7 +146,7 @@ public class ElkJs implements EntryPoint {
                 SERVICE.registerLayoutMetaDataProviders(new PolyominoOptions(), new DisCoMetaDataProvider());
             } else if (alg.equals("sporeOverlap") || alg.equals("sporeCompaction")) {
                 SERVICE.registerLayoutMetaDataProviders(new SporeMetaDataProvider());
-            } else if (alg.equals("rectPacking")) {
+            } else if (alg.equals("rectpacking")) {
                 SERVICE.registerLayoutMetaDataProviders(new RectPackingMetaDataProvider());
             }
         }
