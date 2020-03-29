@@ -125,6 +125,10 @@ public class ElkJs implements EntryPoint {
     }-*/;
 
     public static void registerLayoutAlgorithms(final JavaScriptObject arrayObj) {
+        // Note that since ELK changed the registration mechanism to service loaders (ELK #402),
+        // it is necessary to manually register the core options as well. 
+        SERVICE.registerLayoutMetaDataProviders(new CoreOptions());
+
         JSONArray arr = new JSONArray(arrayObj);
         for (int i = 0; i < arr.size(); ++i) {
             String alg = arr.get(i).isString().stringValue();
