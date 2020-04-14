@@ -313,6 +313,15 @@ git tag 0.x.x
 npm publish
 ```
 
+# Links
+In the following a list of asorted links to other projects and sites that may prove helpful:
+* Generating [svg schematics from netlists](https://github.com/nturley/netlistsvg)
+* Visualizing [npm dependencies](http://npm-dependencies.com) 
+* How to specify [node label placement](http://kieler.github.io/klayjs-d3/examples/node_labels/)
+* How to enforce certain [node positioning](http://kieler.github.io/klayjs-d3/examples/interactive/) (topological)
+* Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
+* Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
+
 # Thanks
 
 * [@automata](https://github.com/automata) for the very first `klayjs` version
