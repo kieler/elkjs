@@ -6,12 +6,12 @@ ELK's flagship is a layer-based layout algorithm that is particularly suited for
 
 Note that elkjs is not a diagramming framework itself - it computes positions for the elements of a diagram. 
 
-elkjs is the successor of [klayjs](https://github.com/OpenKieler/klayjs).
+elkjs is the successor of [klayjs](https://github.com/kieler/klayjs).
 
 #### Demonstrator
 You can see elkjs [live in action](https://rtsys.informatik.uni-kiel.de/elklive/) in conjunction with TypeFox's [sprotty](https://github.com/eclipse/sprotty) diagramming framework.
 
-![](https://raw.githubusercontent.com/OpenKieler/elkjs/master/doc/example_complexRouter.svg?sanitize=true)
+![](https://raw.githubusercontent.com/kieler/elkjs/master/doc/example_complexRouter.svg?sanitize=true)
 
 # Installation
 The latest released version:
@@ -277,7 +277,7 @@ elk.layout(simpleGraph, {
 
 # Building
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/OpenKieler/elkjs)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kieler/elkjs)
 
 For building, a checkout of the [ELK](https://github.com/eclipse/elk) repository is required
 and should be located in the same directory as the checkout of this repository. Like so:
