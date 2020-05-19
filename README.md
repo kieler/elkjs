@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/kieler/elkjs/master/docs/elk_logo_with_text.svg?sanitize=true" height="100"> 
+  <img src="https://raw.githubusercontent.com/kieler/elkjs/master/doc/elk_logo_with_text.svg?sanitize=true" height="100"> 
 </p>
 
 The [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/) implements an infrastructure to connect diagram editors or viewers to automatic layout algorithms. This library takes the layout-relevant part of ELK and makes it available to the JavaScript world.
