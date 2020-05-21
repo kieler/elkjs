@@ -28,17 +28,14 @@ tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
 
-compileJava {
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
-}
-
-// GWT requires to be run with Java 8
-//  (Note there's support for running it with Java 9 but it's limited,
-//   See release notes of the current version 2.8.2:
-//   http://www.gwtproject.org/release-notes.html)
-if (JavaVersion.current() != JavaVersion.VERSION_1_8){
-    throw new GradleException("elkjs build requires to be run with Java 8 (due to GWT compilation).")
+// GWT requires to be run with Java [8, 11]
+//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0)
+if (![JavaVersion.VERSION_1_8, 
+      JavaVersion.VERSION_1_9, 
+      JavaVersion.VERSION_1_10, 
+      JavaVersion.VERSION_11,
+     ].contains(JavaVersion.current())) {
+    throw new GradleException("elkjs build requires to be run with Java [8, 11] (due to GWT compilation).")
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,7 +44,7 @@ if (JavaVersion.current() != JavaVersion.VERSION_1_8){
 
 ext.versions = [
   emfGwt: '2.12.4',
-  gwt:    '2.8.2',
+  gwt:    '2.9.0',
   guava:  '21.0',
   melk:   '0.7.0-SNAPSHOT',
   xtext:  '2.20.0',
