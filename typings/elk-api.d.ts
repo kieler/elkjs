@@ -109,6 +109,7 @@ export interface ELKConstructorArguments {
     defaultLayoutOptions?: LayoutOptions
     algorithms?: string[]
     workerUrl?: string
+    workerFactory?: (url?: string) => Worker
 }
 
 declare const ElkConstructor: {
