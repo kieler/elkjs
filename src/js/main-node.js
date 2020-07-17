@@ -6,19 +6,19 @@ class ELKNode extends ELK {
 
     let workerThreadsExist = false
     try {
-      require.resolve('webworker-threads')
+      require.resolve('web-worker')
       workerThreadsExist = true
     } catch(e) { }
 
     // user requested a worker
     if (options.workerUrl) {
       if (workerThreadsExist) {
-        const { Worker } = require('webworker-threads')
+        const Worker = require('web-worker')
         optionsClone.workerFactory = function (url) { return new Worker(url) }
       } else {
-        console.warn(`Web worker requested but 'webworker-threads' package not installed. 
+        console.warn(`Web worker requested but 'web-worker' package not installed. 
 Consider installing the package or pass your own 'workerFactory' to ELK's constructor.
-... Falling back to non-web worker version. `)
+... Falling back to non-web worker version.`)
       }
     } 
     
