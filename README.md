@@ -130,8 +130,10 @@ elk.layout(graph)
    .then(console.log)
 ```
 
-Note that node.js doesn't come with a web worker out of the box.
-Thus, we have to use a library for it and selected `webworker-threads` as default.
+Since version 10.x, node.js comes with a worker threads implementation that is similar to,
+but not equal to, a browser's `Worker` class.
+To ease implementation on our side, we use a library, `web-worker`, 
+that provides a wrapper around node's `worker_threads`, which is API-compatible to a browser's `Worker.
 Any other library that provides the standard Web Worker methods should be fine though.
 The package is not installed automatically to avoid
 the unnecessary dependency for everyone who is not
