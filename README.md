@@ -318,6 +318,7 @@ npm publish
 
 # Links
 In the following a list of asorted links to other projects and sites that may prove helpful:
+* [Execution time comparison to Java ELK](https://github.com/kieler/elk-speed) 
 * Generating [svg schematics from netlists](https://github.com/nturley/netlistsvg)
 * Visualizing [npm dependencies](http://npm-dependencies.com) 
 * How to specify [node label placement](http://kieler.github.io/klayjs-d3/examples/node_labels/)
