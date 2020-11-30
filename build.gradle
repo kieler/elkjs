@@ -253,6 +253,16 @@ task copyElkJs(type: Copy) {
   into "$srcDir/elkjs"
 }
 
+// Collect all class files that may be involved from both the local build and from dependencies
+task copyAllClassFiles(type: Copy) {
+  from configurations.compile.files
+    .collect { f -> zipTree(f).matching{include '/**/*.class'}.getAsFileTree() }.flatten()
+  from sourceSets.main.output.classesDirs
+  into "/tmp/bytecoder-elkjs/"
+}
+
+copyAllClassFiles.dependsOn compileJava
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //                         GWT Compilation
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
