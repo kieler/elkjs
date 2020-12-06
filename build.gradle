@@ -18,8 +18,8 @@
    +-- xtend-gen
 */
 plugins {
-  id 'org.xtext.builder' version '2.0.5'
-  id 'org.xtext.xtend'   version '2.0.5'
+  id 'org.xtext.builder' version '2.0.8'
+  id 'org.xtext.xtend'   version '2.0.8'
   id 'java'
 }
 
