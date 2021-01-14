@@ -100,9 +100,9 @@ export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
 
 export interface ELK {
     layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
-    knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription>
-    knownLayoutOptions(): Promise<ElkLayoutOptionDescription>
-    knownLayoutCategories(): Promise<ElkLayoutCategoryDescription>
+    knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
+    knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
+    knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
 }
 
 export interface ELKConstructorArguments {
