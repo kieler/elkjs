@@ -75,7 +75,7 @@ See, for instance, `root` in the example above.
 It is possible to only use the suffix of a layout option:
 `algorithm` instead of `org.eclipse.elk.layered`.
 However, if the suffix is not unique the layout option
-may be ignored. To be save, you should always start the
+may be ignored. To be safe, you should always start the
 layout options with the `elk.` part.
 A list of all options and further details of their exact effects
 is available in [ELK's documentation](http://www.eclipse.org/elk/reference.html).
