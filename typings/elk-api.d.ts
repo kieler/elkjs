@@ -31,7 +31,7 @@ export interface ElkShape extends ElkGraphElement {
 export interface ElkNode extends ElkShape {
     children?: ElkNode[]
     ports?: ElkPort[]
-    edges?: ElkEdge[]
+    edges?: ElkExtendedEdge[]
 }
 
 export interface ElkPort extends ElkShape { }
