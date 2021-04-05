@@ -28,8 +28,14 @@ export interface ElkShape extends ElkGraphElement {
     height?: number
 }
 
-export interface ElkNode extends ElkShape {
-    children?: ElkNode[]
+export interface ElkInputNode extends ElkShape {
+    children?: ElkInputNode[]
+    ports?: ElkPort[]
+    edges: (ElkPrimitiveEdge | ElkExtendedEdge)[]
+}
+
+export interface ElkOutputNode extends ElkShape {
+    children?: ElkOutputNode[]
     ports?: ElkPort[]
     edges?: ElkExtendedEdge[]
 }
@@ -99,7 +105,7 @@ export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
 }
 
 export interface ELK {
-    layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
+    layout(graph: ElkInputNode, args?: ElkLayoutArguments): Promise<ElkOutputNode>;
     knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
     knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
     knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
