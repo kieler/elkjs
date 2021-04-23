@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/kieler/elkjs/master/doc/elk_logo_with_text.svg?sanitize=true" height="100"> 
+  <img src="https://raw.githubusercontent.com/kieler/elkjs/master/doc/elk_logo_with_text.svg" height="100"> 
 </p>
 
 The [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/) implements an infrastructure to connect diagram editors or viewers to automatic layout algorithms. This library takes the layout-relevant part of ELK and makes it available to the JavaScript world.
@@ -12,7 +12,7 @@ elkjs is the successor of [klayjs](https://github.com/kieler/klayjs).
 #### Demonstrator
 You can see elkjs [live in action](https://rtsys.informatik.uni-kiel.de/elklive/) in conjunction with TypeFox's [sprotty](https://github.com/eclipse/sprotty) diagramming framework.
 
-![](https://raw.githubusercontent.com/kieler/elkjs/master/doc/example_complexRouter.svg?sanitize=true)
+![](https://raw.githubusercontent.com/kieler/elkjs/master/doc/example_complexRouter.svg)
 
 # Installation
 The latest released version:
