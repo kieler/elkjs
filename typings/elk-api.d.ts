@@ -16,7 +16,7 @@ export interface ElkPoint {
 }
 
 export interface ElkGraphElement {
-    id: string
+    id?: string
     labels?: ElkLabel[]
     layoutOptions?: LayoutOptions
 }
@@ -29,33 +29,31 @@ export interface ElkShape extends ElkGraphElement {
 }
 
 export interface ElkNode extends ElkShape {
+    id: string
     children?: ElkNode[]
-    ports?: ElkPort[]
-    edges?: ElkEdge[]
-}
-
-export interface ElkInputNode extends ElkShape {
-    children?: ElkInputNode[]
-    ports?: ElkPort[]
-    edges: (ElkPrimitiveEdge | ElkExtendedEdge)[]
-}
-
-export interface ElkOutputNode extends ElkShape {
-    children?: ElkOutputNode[]
     ports?: ElkPort[]
     edges?: ElkExtendedEdge[]
 }
 
-export interface ElkPort extends ElkShape { }
-
-export interface ElkLabel extends ElkShape {
-    text: string
+export interface ElkPort extends ElkShape {
+    id: string
 }
 
+export interface ElkLabel extends ElkShape {
+    text?: string
+}
+
+/**
+ * @deprecated use ElkExtendedEdge directly
+ */
 export interface ElkEdge extends ElkGraphElement {
+    id: string
     junctionPoints?: ElkPoint[]
 }
 
+/**
+ * @deprecated use ElkExtendedEdge instead
+ */
 export interface ElkPrimitiveEdge extends ElkEdge {
     source: string
     sourcePort?: string
@@ -69,10 +67,11 @@ export interface ElkPrimitiveEdge extends ElkEdge {
 export interface ElkExtendedEdge extends ElkEdge {
     sources: string[]
     targets: string[]
-    sections: ElkEdgeSection[]
+    sections?: ElkEdgeSection[]
 }
 
 export interface ElkEdgeSection extends ElkGraphElement {
+    id: string
     startPoint: ElkPoint
     endPoint: ElkPoint
     bendPoints?: ElkPoint[]
@@ -111,7 +110,7 @@ export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
 }
 
 export interface ELK {
-    layout<T extends ElkNode | ElkInputNode>(graph: T, args?: ElkLayoutArguments): Promise<T extends ElkInputNode ? ElkOutputNode : ElkNode>;
+    layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
     knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
     knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
     knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
