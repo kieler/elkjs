@@ -40,6 +40,8 @@ public class NodeJsModuleLinker extends AbstractLinker {
         // get the generated javascript
         String[] javaScript = result.getJavaScript();
 
+        out.print("'use strict';");
+        out.newline();
         // create dummies for several things requested by gwt
         out.newline();
         out.print("// -------------- ");
@@ -68,6 +70,20 @@ public class NodeJsModuleLinker extends AbstractLinker {
         out.print("    $moduleBase;");
         out.newline();
         out.newline();
+
+        // Workaround for strict mode, see #127
+        out.print("// -------------- ");
+        out.print("   WORKAROUND STRICT MODE, SEE #127 ");
+        out.print("   -------------- ");
+        out.newline();
+        if (context.isOutputCompact()) {
+            out.print("var g, i, o;");
+        } else {
+            out.print("var _xblockexpression;");
+        }
+        out.newline();
+        out.newline();
+        
         out.print("// -------------- ");
         out.print("   GENERATED CODE ");
         out.print("   -------------- ");
