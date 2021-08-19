@@ -123,7 +123,7 @@ elk.layout(graph)
 const ELK = require('elkjs')
 // with web worker
 const elk = new ELK({
-  workerUrl = './node_modules/elkjs/lib/elk-worker.min.js'
+  workerUrl: './node_modules/elkjs/lib/elk-worker.min.js'
 })
 
 elk.layout(graph)
