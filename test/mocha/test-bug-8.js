@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Kiel University and others.
+ * Copyright (c) 2021 Kiel University and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,23 +18,26 @@ describe('elkjs#8', function() {
   describe('#layout()', function() {
 
     it('should not add edge sections for simple bottom-up layout ', function() {
+      // Note:
+      // We used to test the following here:
+      //   "the edge with the id "a1:0" should have no edge sections since it requires hierarchical layout"
+      // Since ELK decided to raise an exception for certain invalidly structured graphs, 
+      // the test has been adjusted as below. 
       return elk.layout(graph, {
         layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
-      }).should.eventually.be.fulfilled
-        .then(function (graph) {
-          // the edge with the id "a1:0" should have no edge sections since it requires hierarchical layout
-          expect(graph.edges[0].sections).to.be.undefined
-        })
+      }).should.eventually.be.rejectedWith(Error)
+      .and.eventually.have.property('message')
+      .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedGraphException") !== -1)
     })
 
     it('should not add edge sections for simple bottom-up layout (primitive edge format)', function() {
+      // Note: 
+      // Same change as for the test above.
       return elk.layout(graphPrimitiveEdgeFormat, {
         layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
-      }).should.eventually.be.fulfilled
-        .then(function (graph) {
-          // the edge with the id "a1:0" should have no edge sections since it requires hierarchical layout
-          expect(graph.edges[0].sections).to.be.undefined
-        })
+      }).should.eventually.be.rejectedWith(Error)
+      .and.eventually.have.property('message')
+      .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedGraphException") !== -1)
     })
 
     it('should add edge sections for hierarchical layout', function() {
@@ -43,7 +46,7 @@ describe('elkjs#8', function() {
       }).should.eventually.be.fulfilled
         .then(function (graph) {
           // the edge with the id "a1:0" should have one edge section
-          const edgeSections = graph.edges[0].sections
+          const edgeSections = graph.children[0].edges[0].sections
           expect(edgeSections).to.exist
           expect(edgeSections).to.have.an('array').that.has.lengthOf(1)
           const firstSection = edgeSections[0]
@@ -58,7 +61,7 @@ describe('elkjs#8', function() {
       }).should.eventually.be.fulfilled
         .then(function (graph) {
           // the edge with the id "a1:0" should have one edge section
-          const edgeSections = graph.edges[0].sections
+          const edgeSections = graph.children[0].edges[0].sections
           expect(edgeSections).to.exist
           expect(edgeSections).to.have.an('array').that.has.lengthOf(1)
           const firstSection = edgeSections[0]
@@ -72,7 +75,6 @@ describe('elkjs#8', function() {
 
 const graph = {
   "id": "root",
-  "edges": [ { "id": "a1:0", "sources": [ "a1" ], "targets": [ "A" ] } ],
   "children": [
     {
       "id": "A",
@@ -80,7 +82,8 @@ const graph = {
         { "id": "a1" },
         { "id": "a2" },
         { "id": "$generated_A_initial_0" }
-      ]
+      ],
+      "edges": [ { "id": "a1:0", "sources": [ "a1" ], "targets": [ "A" ] } ],
     },
     { "id": "$generated_root_initial_0" }
   ]
@@ -88,7 +91,6 @@ const graph = {
 
 const graphPrimitiveEdgeFormat = {
   "id": "root",
-  "edges": [ { "id": "a1:0", "source": "a1", "target": "A" } ],
   "children": [
     {
       "id": "A",
@@ -96,7 +98,8 @@ const graphPrimitiveEdgeFormat = {
         { "id": "a1" },
         { "id": "a2" },
         { "id": "$generated_A_initial_0" }
-      ]
+      ],
+      "edges": [ { "id": "a1:0", "source": "a1", "target": "A" } ],
     },
     { "id": "$generated_root_initial_0" }
   ]
