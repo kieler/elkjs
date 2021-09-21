@@ -330,6 +330,9 @@ In the following a list of asorted links to other projects and sites that may pr
 - Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
 - [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
 - Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
+- [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
+
+Note: We are happy to extend this list further, so please contact us if you have a project to add
 
 # Thanks
 
