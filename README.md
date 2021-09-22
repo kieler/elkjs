@@ -319,15 +319,20 @@ npm publish
 # Links
 In the following a list of asorted links to other projects and sites that may prove helpful:
 * [Execution time comparison to Java ELK](https://github.com/kieler/elk-speed) 
-* Schematics
-  - [netlistsvg](https://github.com/nturley/netlistsvg) - electronic and gate level schematics as SVG
-  - [d3-hwschematic](https://github.com/Nic30/d3-hwschematic) - interactive digital circuit analysis and documentation, particularly for FPGA-based designs
-* Visualizing [npm dependencies](http://npm-dependencies.com) 
 * How to specify [node label placement](http://kieler.github.io/klayjs-d3/examples/node_labels/)
 * How to enforce certain [node positioning](http://kieler.github.io/klayjs-d3/examples/interactive/) (topological)
-* Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
-* Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
-* [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
+
+# Example Users of elkjs
+
+- Schematics
+  - [netlistsvg](https://github.com/nturley/netlistsvg) - electronic and gate level schematics as SVG
+  - [d3-hwschematic](https://github.com/Nic30/d3-hwschematic) - interactive digital circuit analysis and documentation, particularly for FPGA-based designs
+- Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
+- [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
+- Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
+- [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
+
+Note: We are happy to extend this list further, so please contact us if you have a project to add
 
 # Thanks
 
