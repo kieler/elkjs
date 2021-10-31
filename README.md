@@ -14,6 +14,35 @@ You can see elkjs [live in action](https://rtsys.informatik.uni-kiel.de/elklive/
 
 ![](https://raw.githubusercontent.com/kieler/elkjs/master/doc/example_complexRouter.svg)
 
+
+# FAQs and Recurring Issues
+The following list includes some recurring topics that may have been addressed in issues already: 
+
+* [#100][ejs100], [elk#355][e355], [elk#627][e627] - How to consider previous layout results, including
+  * dynamic layout, and
+  * incrementally adding nodes and edges to an existing layout.
+
+* [elk#315][e315]: Standalone edge routing. 
+
+* [#85][ejs85] elkjs itself is a graph layout engine _only_. In other words, no rendering, styling, etc. is provided. 
+
+* [#127][ejs127], [#141][ejs141], [#142][ejs142] - Issues due to the underlying code transpilation by GWT and/or due to the outdated usage of js modules:
+  *  `g is not defined`,
+  * `Can't resolve web-worker`, and
+  * general usage as part of react, webpack, etc.
+  * [#6][ejs6] Poor modularization
+  * Contributions here are welcome!
+
+[ejs6]: https://github.com/kieler/elkjs/6
+[ejs85]: https://github.com/kieler/elkjs/85
+[ejs100]: https://github.com/kieler/elkjs/100
+[ejs127]: https://github.com/kieler/elkjs/127
+[ejs141]: https://github.com/kieler/elkjs/141
+[ejs142]: https://github.com/kieler/elkjs/142
+[e315]: https://github.com/eclipse/elk/315
+[e355]: https://github.com/eclipse/elk/355
+[e627]: https://github.com/eclipse/elk/627
+
 # Installation
 The latest released version:
 ```bash
