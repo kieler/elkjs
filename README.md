@@ -33,15 +33,15 @@ The following list includes some recurring topics that may have been addressed i
   * [#6][ejs6] Poor modularization
   * Contributions here are welcome!
 
-[ejs6]: https://github.com/kieler/elkjs/6
-[ejs85]: https://github.com/kieler/elkjs/85
-[ejs100]: https://github.com/kieler/elkjs/100
-[ejs127]: https://github.com/kieler/elkjs/127
-[ejs141]: https://github.com/kieler/elkjs/141
-[ejs142]: https://github.com/kieler/elkjs/142
-[e315]: https://github.com/eclipse/elk/315
-[e355]: https://github.com/eclipse/elk/355
-[e627]: https://github.com/eclipse/elk/627
+[ejs6]: https://github.com/kieler/elkjs/issues/6
+[ejs85]: https://github.com/kieler/elkjs/issues/85
+[ejs100]: https://github.com/kieler/elkjs/issues/100
+[ejs127]: https://github.com/kieler/elkjs/issues/127
+[ejs141]: https://github.com/kieler/elkjs/issues/141
+[ejs142]: https://github.com/kieler/elkjs/issues/142
+[e315]: https://github.com/eclipse/elk/issues/315
+[e355]: https://github.com/eclipse/elk/issues/355
+[e627]: https://github.com/eclipse/elk/issues/627
 
 # Installation
 The latest released version:
