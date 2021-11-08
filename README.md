@@ -331,7 +331,7 @@ In the following a list of asorted links to other projects and sites that may pr
 - [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
 - Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
 - [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
-- [Eclipse 4diac](https://www.fordiac.org) ![](https://raw.githubusercontent.com/kieler/elkjs/master/doc/happy-users/4diacIDE_Screenshot.png)
+- [Eclipse 4diac](https://www.fordiac.org)
 
 Note: We are happy to extend this list further, so please contact us if you have a project to add
 
