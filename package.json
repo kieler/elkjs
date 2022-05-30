@@ -1,6 +1,6 @@
 {
   "name": "elkjs",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "author": {
     "name": "Ulf Rüegg",
     "email": "uruurumail@gmail.com"
@@ -37,13 +37,13 @@
     "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
     "mkdirp": "^0.5.0",
-    "mocha": "^6.2.0",
+    "mocha": "^10.0.0",
     "web-worker": "^1.0.0"
   },
   "publishConfig": {

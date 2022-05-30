@@ -46,7 +46,7 @@ ext.versions = [
   emfGwt: '2.12.4',
   gwt:    '2.9.0',
   guava:  '27.1-jre',
-  melk:   '0.8.0-SNAPSHOT',
+  melk:   '0.9.0-SNAPSHOT',
   xtext:  '2.20.0',
 ]
 
