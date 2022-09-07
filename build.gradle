@@ -18,8 +18,11 @@
    +-- xtend-gen
 */
 plugins {
-  id 'org.xtext.builder' version '2.0.5'
-  id 'org.xtext.xtend'   version '2.0.5'
+  // The documentation of the plugin [1] states "tested up to [gradle] 7.2". 
+  // [1] https://xtext.github.io/xtext-gradle-plugin/xtext-builder.html
+  
+  id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
+  id 'org.xtext.xtend'   version '3.0.2'
   id 'java'
 }
 
@@ -128,29 +131,29 @@ dependencies {
   xtextLanguages "org.eclipse.elk:org.eclipse.elk.core.meta:$versions.melk"
 
   // for the minus sign to work in melk files
-  xtextCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
+  xtextImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 
-  xtextCompile "com.google.guava:guava:$versions.guava"
+  xtextImplementation "com.google.guava:guava:$versions.guava"
 
-  xtextCompile "com.google.gwt:gwt-dev:$versions.gwt"
-  xtextCompile "com.google.gwt:gwt-user:$versions.gwt"
+  xtextImplementation "com.google.gwt:gwt-dev:$versions.gwt"
+  xtextImplementation "com.google.gwt:gwt-user:$versions.gwt"
 
-  xtextCompile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
-  xtextCompile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
+  xtextImplementation "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  xtextImplementation "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // emf for gwt
-  compile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
-  compile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
+  implementation "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  implementation "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
   // guava
-  compile "com.google.guava:guava:$versions.guava"
+  implementation "com.google.guava:guava:$versions.guava"
   // gwt
-  compile "com.google.gwt:gwt-user:$versions.gwt"
-  compile "com.google.gwt:gwt-dev:$versions.gwt"
+  implementation "com.google.gwt:gwt-user:$versions.gwt"
+  implementation "com.google.gwt:gwt-dev:$versions.gwt"
   // xtend libs
-  compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-  compile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
+  implementation "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+  implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
