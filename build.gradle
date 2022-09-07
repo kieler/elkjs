@@ -31,14 +31,11 @@ tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
 
-// GWT requires to be run with Java [8, 11]
-//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0)
-if (![JavaVersion.VERSION_1_8, 
-      JavaVersion.VERSION_1_9, 
-      JavaVersion.VERSION_1_10, 
-      JavaVersion.VERSION_11,
-     ].contains(JavaVersion.current())) {
-    throw new GradleException("elkjs build requires to be run with Java [8, 11] (due to GWT compilation).")
+// GWT 2.10 allows to run Java [8, 17]
+//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0)
+if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_8) 
+    || JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_18)) {
+    throw new GradleException("elkjs build requires to be run with Java [8, 17] (due to GWT compilation). You are running " + JavaVersion.current() + ".")
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,8 +44,7 @@ if (![JavaVersion.VERSION_1_8,
 
 ext.versions = [
   emfGwt: '2.12.4',
-  gwt:    '2.9.0',
-  guava:  '27.1-jre',
+  gwt:    '2.10.0',
   melk:   '0.9.0-SNAPSHOT',
   xtext:  '2.20.0',
 ]
