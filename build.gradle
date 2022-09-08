@@ -1,6 +1,4 @@
 /*
-  TODO document the script
-
   # Task depencencies
   The dependencies are specified at the end of this file,
   not within the task definitions.
@@ -20,7 +18,6 @@
 plugins {
   // The documentation of the plugin [1] states "tested up to [gradle] 7.2". 
   // [1] https://xtext.github.io/xtext-gradle-plugin/xtext-builder.html
-  
   id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
   id 'org.xtext.xtend'   version '3.0.2'
   id 'java'
@@ -59,6 +56,10 @@ java {
   sourceCompatibility = "$versions.sourceTargetCompatibility"
   targetCompatibility = "$versions.sourceTargetCompatibility"
 }
+
+project.logger.lifecycle("You are running Java version ${JavaVersion.current()}.")
+project.logger.lifecycle("Due to current Xtext's limitations ($versions.xtext), source and target compatibility have been set to ${versions.sourceTargetCompatibility}.")
+
 if (!hasProperty('elkRepo')) {
 	ext.elkRepo = '../elk'
 }
@@ -141,8 +142,8 @@ dependencies {
 
   xtextImplementation "com.google.guava:guava:$versions.guava"
 
-  xtextImplementation "com.google.gwt:gwt-dev:$versions.gwt"
-  xtextImplementation "com.google.gwt:gwt-user:$versions.gwt"
+  xtextImplementation "org.gwtproject:gwt-dev:$versions.gwt"
+  xtextImplementation "org.gwtproject:gwt-user:$versions.gwt"
 
   xtextImplementation "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
   xtextImplementation "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
@@ -155,8 +156,8 @@ dependencies {
   // guava
   implementation "com.google.guava:guava:$versions.guava"
   // gwt
-  implementation "com.google.gwt:gwt-user:$versions.gwt"
-  implementation "com.google.gwt:gwt-dev:$versions.gwt"
+  implementation "org.gwtproject:gwt-user:$versions.gwt"
+  implementation "org.gwtproject:gwt-dev:$versions.gwt"
   // xtend libs
   implementation "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
   implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
@@ -165,10 +166,9 @@ dependencies {
 
   gwt "com.google.guava:guava-gwt:$versions.guava"
 
-  gwt "com.google.gwt:gwt:$versions.gwt"
-  gwt "com.google.gwt:gwt-dev:$versions.gwt"
-  gwt "com.google.gwt:gwt-user:$versions.gwt"
-  //gwt "com.google.gwt:gwt-servlet:$versions.gwt"
+  gwt "org.gwtproject:gwt:$versions.gwt"
+  gwt "org.gwtproject:gwt-dev:$versions.gwt"
+  gwt "org.gwtproject:gwt-user:$versions.gwt"
 
   gwt "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt:sources"
   gwt "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt:sources"
