@@ -33,7 +33,7 @@ export class GenerateTypesForApi {
           .map(
             (val) =>
               `/** ${val.name}: \n* ${val.description}\n*/\n"${val.id?.slice(
-                "org.eclipse.elk.".length
+                "org.eclipse.".length
               )}"?: ${
                 val.type == "STRING"
                   ? "string"
