@@ -895,10 +895,10 @@ export interface LayoutOptionsLabels {
 
 export interface LayoutOptions
   extends LayoutOptionsParents,
-    LayoutOptionsNodes,
-    LayoutOptionsEdges,
-    LayoutOptionsPorts,
-    LayoutOptionsLabels {}
+  LayoutOptionsNodes,
+  LayoutOptionsEdges,
+  LayoutOptionsPorts,
+  LayoutOptionsLabels { }
 
 export interface ElkPoint {
   x: number
@@ -908,7 +908,6 @@ export interface ElkPoint {
 export interface ElkGraphElement {
   id?: string
   labels?: ElkLabel[]
-  layoutOptions?: LayoutOptions
 }
 
 export interface ElkShape extends ElkGraphElement {
@@ -923,14 +922,17 @@ export interface ElkNode extends ElkShape {
   children?: ElkNode[]
   ports?: ElkPort[]
   edges?: ElkExtendedEdge[]
+  layoutOptions?: LayoutOptionsNodes & LayoutOptionsParents
 }
 
 export interface ElkPort extends ElkShape {
   id: string
+  layoutOptions?: LayoutOptionsPorts
 }
 
 export interface ElkLabel extends ElkShape {
   text?: string
+  layoutOptions?: LayoutOptionsLabels
 }
 
 /**
@@ -939,6 +941,7 @@ export interface ElkLabel extends ElkShape {
 export interface ElkEdge extends ElkGraphElement {
   id: string
   junctionPoints?: ElkPoint[]
+  layoutOptions?: LayoutOptionsEdges
 }
 
 /**
@@ -969,6 +972,7 @@ export interface ElkEdgeSection extends ElkGraphElement {
   outgoingShape?: string
   incomingSections?: string[]
   outgoingSections?: string[]
+  layoutOptions?: LayoutOptionsEdges & LayoutOptionsLabels
 }
 
 export interface ElkLayoutArguments {
