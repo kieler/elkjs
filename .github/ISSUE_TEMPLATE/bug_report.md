@@ -10,7 +10,7 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 Add a graph to reproduce your problem.
-Linking the graph in ELKT or JSON format via [elklive](https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html) (or with [JSON editor](https://rtsys.informatik.uni-kiel.de/elklive/json.html)) is preferred.
+Linking the graph in ELKT or JSON format via [elklive](https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html) (or with the [JSON editor](https://rtsys.informatik.uni-kiel.de/elklive/json.html)) is preferred.
 You can also [convert](https://rtsys.informatik.uni-kiel.de/elklive/conversion.html) between the two.
 
 **Expected behavior**
