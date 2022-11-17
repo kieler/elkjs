@@ -1,6 +1,4 @@
 /*
-  TODO document the script
-
   # Task depencencies
   The dependencies are specified at the end of this file,
   not within the task definitions.
@@ -18,8 +16,10 @@
    +-- xtend-gen
 */
 plugins {
-  id 'org.xtext.builder' version '2.0.5'
-  id 'org.xtext.xtend'   version '2.0.5'
+  // The documentation of the plugin [1] states "tested up to [gradle] 7.2". 
+  // [1] https://xtext.github.io/xtext-gradle-plugin/xtext-builder.html
+  id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
+  id 'org.xtext.xtend'   version '3.0.2'
   id 'java'
 }
 
@@ -28,14 +28,11 @@ tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
 
-// GWT requires to be run with Java [8, 11]
-//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0)
-if (![JavaVersion.VERSION_1_8, 
-      JavaVersion.VERSION_1_9, 
-      JavaVersion.VERSION_1_10, 
-      JavaVersion.VERSION_11,
-     ].contains(JavaVersion.current())) {
-    throw new GradleException("elkjs build requires to be run with Java [8, 11] (due to GWT compilation).")
+// GWT 2.10 allows to run Java [8, 17]
+//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0)
+if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_8) 
+    || JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_18)) {
+    throw new GradleException("elkjs build requires to be run with Java [8, 17] (due to GWT compilation). You are running " + JavaVersion.current() + ".")
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -44,11 +41,24 @@ if (![JavaVersion.VERSION_1_8,
 
 ext.versions = [
   emfGwt: '2.12.4',
-  gwt:    '2.9.0',
-  guava:  '27.1-jre',
+  gwt:    '2.10.0',
+  guava:  '31.1-jre',
   melk:   '0.9.0-SNAPSHOT',
-  xtext:  '2.20.0',
+  xtext:  '2.28.0',
+
+  // From 2.26 on Xtext supports Java 17, however,
+  //   "Xtext now supports running on Java 17 with Java 8 and 11 targets. Source and Target 17 are not supported yet".
+  // https://www.eclipse.org/Xtext/releasenotes.html#/releasenotes/2022/08/29/version-2-28-0
+  sourceTargetCompatibility: JavaVersion.current().ordinal() < 11 - 1 ? '1.8' : '11' 
 ]
+
+java {
+  sourceCompatibility = "$versions.sourceTargetCompatibility"
+  targetCompatibility = "$versions.sourceTargetCompatibility"
+}
+
+project.logger.lifecycle("You are running Java version ${JavaVersion.current()}.")
+project.logger.lifecycle("Due to current Xtext's limitations ($versions.xtext), source and target compatibility have been set to ${versions.sourceTargetCompatibility}.")
 
 if (!hasProperty('elkRepo')) {
 	ext.elkRepo = '../elk'
@@ -128,38 +138,37 @@ dependencies {
   xtextLanguages "org.eclipse.elk:org.eclipse.elk.core.meta:$versions.melk"
 
   // for the minus sign to work in melk files
-  xtextCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
+  xtextImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 
-  xtextCompile "com.google.guava:guava:$versions.guava"
+  xtextImplementation "com.google.guava:guava:$versions.guava"
 
-  xtextCompile "com.google.gwt:gwt-dev:$versions.gwt"
-  xtextCompile "com.google.gwt:gwt-user:$versions.gwt"
+  xtextImplementation "org.gwtproject:gwt-dev:$versions.gwt"
+  xtextImplementation "org.gwtproject:gwt-user:$versions.gwt"
 
-  xtextCompile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
-  xtextCompile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
+  xtextImplementation "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  xtextImplementation "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // emf for gwt
-  compile "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
-  compile "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
+  implementation "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt"
+  implementation "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt"
   // guava
-  compile "com.google.guava:guava:$versions.guava"
+  implementation "com.google.guava:guava:$versions.guava"
   // gwt
-  compile "com.google.gwt:gwt-user:$versions.gwt"
-  compile "com.google.gwt:gwt-dev:$versions.gwt"
+  implementation "org.gwtproject:gwt-user:$versions.gwt"
+  implementation "org.gwtproject:gwt-dev:$versions.gwt"
   // xtend libs
-  compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-  compile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
+  implementation "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+  implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   gwt "com.google.guava:guava-gwt:$versions.guava"
 
-  gwt "com.google.gwt:gwt:$versions.gwt"
-  gwt "com.google.gwt:gwt-dev:$versions.gwt"
-  gwt "com.google.gwt:gwt-user:$versions.gwt"
-  //gwt "com.google.gwt:gwt-servlet:$versions.gwt"
+  gwt "org.gwtproject:gwt:$versions.gwt"
+  gwt "org.gwtproject:gwt-dev:$versions.gwt"
+  gwt "org.gwtproject:gwt-user:$versions.gwt"
 
   gwt "com.genmymodel.emf.gwt:emf-common:$versions.emfGwt:sources"
   gwt "com.genmymodel.emf.gwt:emf-ecore:$versions.emfGwt:sources"
