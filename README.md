@@ -336,6 +336,7 @@ Current procedure
 ```bash
 git checkout -b releases/0.x.x
 # Check that the version numbers are correct, if necessary update versions and commit the changes
+# in package.json set "publishconfig.tag" to "latest"
 npm install
 npm run build
 npm run test
