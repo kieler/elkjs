@@ -335,15 +335,23 @@ Afterwards you can find the created files in the `lib` folder.
 Current procedure
 ```bash
 git checkout -b releases/0.x.x
-# Update versions and commit the changes
+# Check that the version numbers are correct, if necessary update versions and commit the changes
 npm install
 npm run build
 npm run test
 # Add ./lib/ directory and commit
 git tag 0.x.x
-# Push release branch an tags to remote
-npm publish
+# Push release branch and tags to remote
+# Create a new release on Github for the new tag and afterwards publish to npm 
+npm publish --tag=latest
 ```
+Afterwards the following version numbers have to be changed to the next release number:
+* `version` in `package.json`,
+* `melk` in `build.gradle`.
+
+## Incorrect npm tags
+Incorrectly tagged versions on npm can be updated with
+`npm dist-tag add elkjs@<version> <latest/next>`.
 
 # Links
 In the following a list of asorted links to other projects and sites that may prove helpful:
