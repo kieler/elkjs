@@ -342,6 +342,7 @@ npm run test
 # Add ./lib/ directory and commit
 git tag 0.x.x
 # Push release branch and tags to remote
+# Create a new release on Github for the new tag and afterwards publish to npm
 npm publish
 ```
 Afterwards the following version numbers have to be changed to the next release number:
