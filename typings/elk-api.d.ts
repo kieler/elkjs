@@ -8,121 +8,123 @@
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 
+export type ElkIdentifier = string | number;
+
 export interface LayoutOptions {
-    [key: string]: string
+    [key: string]: string;
 }
 
 export interface ElkPoint {
-    x: number
-    y: number
+    x: number;
+    y: number;
 }
 
 export interface ElkGraphElement {
-    id?: string
-    labels?: ElkLabel[]
-    layoutOptions?: LayoutOptions
+    id?: ElkIdentifier;
+    labels?: ElkLabel[];
+    layoutOptions?: LayoutOptions;
 }
 
 export interface ElkShape extends ElkGraphElement {
-    x?: number
-    y?: number
-    width?: number
-    height?: number
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
 }
 
 export interface ElkNode extends ElkShape {
-    id: string
-    children?: ElkNode[]
-    ports?: ElkPort[]
-    edges?: ElkExtendedEdge[]
+    id: ElkIdentifier;
+    children?: ElkNode[];
+    ports?: ElkPort[];
+    edges?: ElkExtendedEdge[];
 }
 
 export interface ElkPort extends ElkShape {
-    id: string
+    id: ElkIdentifier;
 }
 
 export interface ElkLabel extends ElkShape {
-    text?: string
+    text?: string;
 }
 
 /**
  * @deprecated use ElkExtendedEdge directly
  */
 export interface ElkEdge extends ElkGraphElement {
-    id: string
-    junctionPoints?: ElkPoint[]
+    id: ElkIdentifier;
+    junctionPoints?: ElkPoint[];
 }
 
 /**
  * @deprecated use ElkExtendedEdge instead
  */
 export interface ElkPrimitiveEdge extends ElkEdge {
-    source: string
-    sourcePort?: string
-    target: string
-    targetPort?: string
-    sourcePoint?: ElkPoint
-    targetPoint?: ElkPoint
-    bendPoints?: ElkPoint[]
+    source: ElkIdentifier;
+    sourcePort?: ElkIdentifier;
+    target: ElkIdentifier;
+    targetPort?: ElkIdentifier;
+    sourcePoint?: ElkPoint;
+    targetPoint?: ElkPoint;
+    bendPoints?: ElkPoint[];
 }
 
 export interface ElkExtendedEdge extends ElkEdge {
-    sources: string[]
-    targets: string[]
-    sections?: ElkEdgeSection[]
+    sources: ElkIdentifier[];
+    targets: ElkIdentifier[];
+    sections?: ElkEdgeSection[];
 }
 
 export interface ElkEdgeSection extends ElkGraphElement {
-    id: string
-    startPoint: ElkPoint
-    endPoint: ElkPoint
-    bendPoints?: ElkPoint[]
-    incomingShape?: string
-    outgoingShape?: string
-    incomingSections?: string[]
-    outgoingSections?: string[]
+    id: ElkIdentifier;
+    startPoint: ElkPoint;
+    endPoint: ElkPoint;
+    bendPoints?: ElkPoint[];
+    incomingShape?: ElkIdentifier;
+    outgoingShape?: ElkIdentifier;
+    incomingSections?: ElkIdentifier[];
+    outgoingSections?: ElkIdentifier[];
 }
 
 export interface ElkLayoutArguments {
-    layoutOptions?: LayoutOptions
-    logging?: boolean
-    measureExecutionTime?: boolean
+    layoutOptions?: LayoutOptions;
+    logging?: boolean;
+    measureExecutionTime?: boolean;
 }
 
 export interface ElkCommonDescription {
-    id?: string
-    name?: string
-    description?: string
+    id?: ElkIdentifier;
+    name?: string;
+    description?: string;
 }
 
 export interface ElkLayoutAlgorithmDescription extends ElkCommonDescription {
-    category?: string
-    knownOptions?: string[]
-    supportedFeatures?: string[]
+    category?: string;
+    knownOptions?: string[];
+    supportedFeatures?: string[];
 }
 
 export interface ElkLayoutOptionDescription extends ElkCommonDescription {
-    group?: string
-    type?: string
-    targets?: string[]
+    group?: string;
+    type?: string;
+    targets?: string[];
 }
 
 export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
-    knownLayouters?: string[]
+    knownLayouters?: string[];
 }
 
 export interface ELK {
     layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
-    knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
-    knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
-    knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
+    knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>;
+    knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>;
+    knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>;
 }
 
 export interface ELKConstructorArguments {
-    defaultLayoutOptions?: LayoutOptions
-    algorithms?: string[]
-    workerUrl?: string
-    workerFactory?: (url?: string) => Worker
+    defaultLayoutOptions?: LayoutOptions;
+    algorithms?: string[];
+    workerUrl?: string;
+    workerFactory?: (url?: string) => Worker;
 }
 
 declare const ElkConstructor: {
