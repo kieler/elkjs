@@ -11,7 +11,7 @@
 export type ElkIdentifier = string | number;
 
 export interface LayoutOptions {
-    [key: string]: string;
+    [key: string]: string | number;
 }
 
 export interface ElkPoint {
