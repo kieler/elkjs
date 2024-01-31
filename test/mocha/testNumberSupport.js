@@ -15,7 +15,7 @@ chai.should();
 const ELK = require('../../lib/main.js');
 const elk = new ELK();
 
-describe('Number suport for identifiers and layout option values', function () {
+describe('Number support for identifiers and layout option values', function () {
 	describe('#layout(...)', function () {
 		it('Layour identifiers should accept number identifiers', function () {
 			return elk.layout(numberIdentifierGraph)
