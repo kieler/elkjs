@@ -17,12 +17,12 @@ const elk = new ELK();
 
 describe('Number support for identifiers and layout option values', function () {
 	describe('#layout(...)', function () {
-		it('Layour identifiers should accept number identifiers', function () {
+		it('Layout identifiers should accept number identifiers', function () {
 			return elk.layout(numberIdentifierGraph)
 				.should.eventually.be.fulfilled;
 		})
 
-		it('Layour identifiers should accept number identifiers', function () {
+		it('Layout option values should accept number', function () {
 			return elk.layout(numberOptionGraph)
 				.should.eventually.be.fulfilled;
 		})
