@@ -366,6 +366,7 @@ In the following a list of asorted links to other projects and sites that may pr
   - [d3-hwschematic](https://github.com/Nic30/d3-hwschematic) - interactive digital circuit analysis and documentation, particularly for FPGA-based designs
 - Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
 - [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
+- [reactflow](https://reactflow.dev) - React component for building node-based editors and interactive diagrams
 - Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
 - [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
 - [Eclipse 4diac](https://www.fordiac.org)
