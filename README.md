@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/kieler/elkjs/master/doc/elk_logo_with_text.svg" height="100"> 
 </p>
 
+[![npm version](https://badge.fury.io/js/elkjs.svg)](https://badge.fury.io/js/elkjs)
+
 The [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/) implements an infrastructure to connect diagram editors or viewers to automatic layout algorithms. This library takes the layout-relevant part of ELK and makes it available to the JavaScript world.
 ELK's flagship is a layer-based layout algorithm that is particularly suited for node-link diagrams with an inherent direction and ports (explicit attachment points on a node's border). It is based on the ideas originally introduced by Sugiyama et al. An example can be seen in the screenshot below.
 
