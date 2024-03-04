@@ -372,6 +372,7 @@ In the following a list of asorted links to other projects and sites that may pr
 - [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
 - [Eclipse 4diac](https://www.fordiac.org)
 - [capellambse-context-diagrams](https://github.com/DSD-DBS/capellambse-context-diagrams) - Generating systems engineering context diagrams for [Capella](https://www.eclipse.org/capella/) in Python
+- Used to layout the [dataflow viewer](https://github.com/vega/editor/pull/1023) in the [Vega Editor](https://vega.github.io/editor/#/)
 
 Note: We are happy to extend this list further, so please contact us if you have a project to add
 
