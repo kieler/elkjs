@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**Ask our questions**
+**Ask your questions**
 A clear and concise description of what you want to do.
 Add a graph to reproduce to showcase what you want to do.
 Linking the graph in ELKT or JSON format via [elklive](https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html) (or with the [JSON editor](https://rtsys.informatik.uni-kiel.de/elklive/json.html)) is preferred.
