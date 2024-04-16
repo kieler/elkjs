@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Copyright (c) 2019 TypeFox and others.
- * 
- * This program and the accompanying materials are made 
- * available under the terms of the Eclipse Public License 2.0 
- * which is available at https://www.eclipse.org/legal/epl-2.0/ 
- * 
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 
@@ -116,6 +116,7 @@ export interface ELK {
     knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
     knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
     knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
+    terminateWorker(): void;
 }
 
 export interface ELKConstructorArguments {
