@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/kieler/elkjs/master/doc/elk_logo_with_text.svg" height="100"> 
 </p>
 
+[![npm version](https://badge.fury.io/js/elkjs.svg)](https://badge.fury.io/js/elkjs)
+
 The [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/) implements an infrastructure to connect diagram editors or viewers to automatic layout algorithms. This library takes the layout-relevant part of ELK and makes it available to the JavaScript world.
 ELK's flagship is a layer-based layout algorithm that is particularly suited for node-link diagrams with an inherent direction and ports (explicit attachment points on a node's border). It is based on the ideas originally introduced by Sugiyama et al. An example can be seen in the screenshot below.
 
@@ -335,15 +337,24 @@ Afterwards you can find the created files in the `lib` folder.
 Current procedure
 ```bash
 git checkout -b releases/0.x.x
-# Update versions and commit the changes
+# Check that the version numbers are correct, if necessary update versions and commit the changes
 npm install
 npm run build
 npm run test
 # Add ./lib/ directory and commit
 git tag 0.x.x
-# Push release branch an tags to remote
-npm publish
+# Push release branch and tags to remote
+git push --tags --set-upstream origin releases/0.x.x
+# Create a new release on Github for the new tag and afterwards publish to npm 
+npm publish --tag=latest
 ```
+Afterwards the following version numbers have to be changed to the next release number:
+* `version` in `package.json`,
+* `melk` in `build.gradle`.
+
+## Incorrect npm tags
+Incorrectly tagged versions on npm can be updated with
+`npm dist-tag add elkjs@<version> <latest/next>`.
 
 # Links
 In the following a list of asorted links to other projects and sites that may prove helpful:
@@ -358,10 +369,12 @@ In the following a list of asorted links to other projects and sites that may pr
   - [d3-hwschematic](https://github.com/Nic30/d3-hwschematic) - interactive digital circuit analysis and documentation, particularly for FPGA-based designs
 - Cytoscape [adapter](https://github.com/cytoscape/cytoscape.js-elk)
 - [reaflow](https://reaflow.dev) - Node-based editor built on elkjs in React
+- [reactflow](https://reactflow.dev) - React component for building node-based editors and interactive diagrams
 - Wrapping elkjs into a [docker-based microservice](https://github.com/elbosso/elkjsmicroservice)
 - [sprotty](https://github.com/eclipse/sprotty) - A diagramming framework
 - [Eclipse 4diac](https://www.fordiac.org)
 - [capellambse-context-diagrams](https://github.com/DSD-DBS/capellambse-context-diagrams) - Generating systems engineering context diagrams for [Capella](https://www.eclipse.org/capella/) in Python
+- Used to layout the [dataflow viewer](https://github.com/vega/editor/pull/1023) in the [Vega Editor](https://vega.github.io/editor/#/)
 
 Note: We are happy to extend this list further, so please contact us if you have a project to add
 
