@@ -112,7 +112,10 @@ export interface ElkLayoutCategoryDescription extends ElkCommonDescription {
 }
 
 export interface ELK {
-    layout(graph: ElkNode, args?: ElkLayoutArguments): Promise<ElkNode>;
+    layout<T extends ElkNode>(
+        graph: T,
+        args?: ElkLayoutArguments
+    ): Promise<Omit<T, 'children'> & { children?: (T['children'][number] & ElkNode)[] }>;
     knownLayoutAlgorithms(): Promise<ElkLayoutAlgorithmDescription[]>
     knownLayoutOptions(): Promise<ElkLayoutOptionDescription[]>
     knownLayoutCategories(): Promise<ElkLayoutCategoryDescription[]>
