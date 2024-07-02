@@ -26,10 +26,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: elkjs
     - uses: actions/checkout@v4
       with:
         repository: eclipse/elk
         ref: master
+        path: elk
     - name: Set up JDK ${{ matrix.java-version }}
       uses: actions/setup-java@v4
       with:
@@ -50,13 +53,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: |
         ls -a
-        chmod +x gradlew
+        chmod +x elkjs/gradlew
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
+        cd elkjs
         npm install
         npm run build --if-present
         npm test
