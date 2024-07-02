@@ -37,8 +37,9 @@
     "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "@babel/core": "^7.24.7",
+    "@babel/cli": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
     "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
