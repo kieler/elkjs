@@ -24,7 +24,7 @@ import org.eclipse.elk.graph.*;
 import org.eclipse.elk.graph.json.*;
 
 import org.eclipse.elk.alg.common.compaction.options.*;
-import org.eclipse.elk.alg.disco.options.*;
+//import org.eclipse.elk.alg.disco.options.*;
 import org.eclipse.elk.alg.layered.options.*;
 import org.eclipse.elk.alg.force.options.*;
 import org.eclipse.elk.alg.mrtree.options.*;
@@ -144,8 +144,8 @@ public class ElkJs implements EntryPoint {
                 SERVICE.registerLayoutMetaDataProviders(new MrTreeMetaDataProvider());
             } else if (alg.equals("radial")) {
                 SERVICE.registerLayoutMetaDataProviders(new RadialMetaDataProvider());
-            } else if (alg.equals("disco")) {
-                SERVICE.registerLayoutMetaDataProviders(new PolyominoOptions(), new DisCoMetaDataProvider());
+   //         } else if (alg.equals("disco")) {
+   //             SERVICE.registerLayoutMetaDataProviders(new PolyominoOptions(), new DisCoMetaDataProvider());
             } else if (alg.equals("sporeOverlap") || alg.equals("sporeCompaction")) {
                 SERVICE.registerLayoutMetaDataProviders(new SporeMetaDataProvider());
             } else if (alg.equals("rectpacking")) {
