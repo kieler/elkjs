@@ -48,7 +48,9 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
         restore-keys: ${{ runner.os }}-node-
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: |
+        ls -a
+        chmod +x gradlew
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
