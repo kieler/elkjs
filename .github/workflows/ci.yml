@@ -33,6 +33,7 @@ jobs:
     - name: Set up JDK ${{ matrix.java-version }}
       uses: actions/setup-java@v4
       with:
+        distribution: 'zulu'
         java-version: ${{ matrix.java-version }}
     - name: Cache gradle packages
       uses: actions/cache@v4
