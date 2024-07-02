@@ -52,7 +52,6 @@ jobs:
         restore-keys: ${{ runner.os }}-node-
     - name: Grant execute permission for gradlew
       run: |
-        ls -a
         chmod +x elkjs/gradlew
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
