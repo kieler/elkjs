@@ -71,7 +71,8 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.common/src",
   // The algorithms
-  "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
+  // FIXME: DisCo breaks Github Actions for unknown reasons, see https://github.com/kieler/elkjs/issues/291
+  //"${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
