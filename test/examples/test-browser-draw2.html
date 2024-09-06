@@ -1,0 +1,73 @@
+<html>
+  <script src="../../lib/elk.bundled.js"></script>
+  <script src="SimpleGraphDrawer.js"></script>
+  <script type="text/javascript">
+    const elk = new ELK()
+
+    const graph = {
+      id: "root",
+      properties: {
+        'algorithm': 'layered',
+        'org.eclipse.elk.hierarchyHandling': 'INCLUDE_CHILDREN'
+      },
+      children: [
+        { id: "n0", width: 60, height: 60,
+          labels: [{text: "n0", width: 22, height: 20}]
+        },
+        { id: "n1", width: 60, height: 60,
+          labels: [{text: "n1", width: 22, height: 20}]
+        },
+        { id: "n2",
+          labels: [{text: "n2", width: 22, height: 20}],
+          ports: [
+            { id: "p1", width: 10, height: 10,
+              labels: [{text: "p1", width: 22, height: 20}]
+            },
+            { id: "p2", width: 10, height: 10,
+              labels: [{text: "p2", width: 22, height: 20}]
+            }
+          ],
+          children: [
+            { id: "n3",
+              labels: [{text: "n3", width: 22, height: 20}],
+              children: [
+                { id: "n4", width: 60, height: 60,
+                  labels: [{text: "n4", width: 22, height: 20}],
+                },
+                { id: "n5", width: 60, height: 60,
+                  labels: [{text: "n5", width: 22, height: 20}],
+                }
+              ],
+              edges: [
+                { id: "e6", sources: [ "n4" ], targets: [ "n5" ] }
+              ]
+            },
+            { id: "n6", width: 60, height: 60,
+              labels: [{text: "n6", width: 22, height: 20}],
+            }
+          ],
+          edges: [
+            { id: "e4", sources: [ "p2" ], targets: [ "n6" ] },
+            { id: "e5", sources: [ "n6" ], targets: [ "n6" ] }
+          ]
+        }
+      ],
+      edges: [
+        { id: "e1", sources: [ "n0" ], targets: [ "p1" ] },
+        { id: "e2", sources: [ "n0" ], targets: [ "n4" ] },
+        { id: "e3", sources: [ "n1" ], targets: [ "p2" ] },
+      ]
+    }
+    
+    elk.layout(graph)
+       .then(function(g) {
+         const drawer = new SimpleGraphDrawer({});
+         const svg = drawer.draw(g);
+         svg.addTo(document.body);
+
+         const rawOutput = document.createElement('div');
+         rawOutput.innerHTML = "<pre>" + JSON.stringify(g, null, " ") + "</pre>";
+         document.body.appendChild(rawOutput);
+       })
+  </script>
+</html>
