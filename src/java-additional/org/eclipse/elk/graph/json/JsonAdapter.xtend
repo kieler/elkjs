@@ -196,6 +196,14 @@ class JsonAdapter {
     }
 
     // - - - - - - - - - - - - - - - - - - -
+    // Remove members from a json object
+    // - - - - - - - - - - - - - - - - - - -
+    
+    def void removeJsonObj(JSONObject o, String element) {
+        o.put(element, null)
+    }
+
+    // - - - - - - - - - - - - - - - - - - -
     // Add to a json array
     // - - - - - - - - - - - - - - - - - - -
 
