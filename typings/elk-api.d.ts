@@ -50,6 +50,7 @@ export interface ElkLabel extends ElkShape {
  */
 export interface ElkEdge extends ElkGraphElement {
     id: string
+    container?: string
     junctionPoints?: ElkPoint[]
 }
 
