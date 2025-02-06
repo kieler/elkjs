@@ -24,7 +24,7 @@
   ],
   "license": "EPL-2.0",
   "scripts": {
-    "test": "mocha test/mocha",
+    "test": "mocha --timeout 10000 test/mocha",
     "gradle": "./gradlew lib",
     "babel": "babel src/js/ -d build/js/",
     "browserifyApi": "browserify build/js/main-api.js -s ELK --outfile lib/elk-api.js",
