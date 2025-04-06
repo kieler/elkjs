@@ -1,0 +1,182 @@
+<html>
+<head>
+  <script src="../../lib/elk-api.js"></script>
+  <script src="SimpleGraphDrawer.js"></script>
+  <style>
+    body {
+      font-family: monospace;
+    }
+    table {
+      border-spacing: 5em 0;
+    }
+    span.ROOT {
+      color: red;
+    }
+    span.PARENT {
+      color: blue;
+    }
+    span.CONTAINER {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<h1>Coordinate Mode Demonstrator</h1>
+<pre>
+  This demonstrates use of the different shape and edge coordinate modes.
+
+  Notes:
+
+  1. In the input JSON, we defined the edge inside node A for demonstration purposes.
+     It did not have to be defined there. (You can define it anywhere.)
+     This means the PARENT of the edge is node A, while the CONTAINER is node Q.
+
+  2. For each combination of coordinate modes, we show the upper left corner
+     coordinates for each node, and the coordinates of the start and end points
+     of the edge.
+
+  3. The leaf nodes (A and C) each have dimensions 30x30. Thus, for example, when
+     edgeCoords = PARENT, the start point of the edge is at offset (30, 15) from
+     the upper left corner of A (see below).
+
+  4. You can use software of your choice to draw the graph, but it must
+     work with the type of coordinates you tell ELK to use.
+</pre>
+<script type="text/javascript">
+  /* This is our demo graph.
+   * It contains just enough structure to demonstrate the differences between
+   * parent, container, and root, for a hierarchy-crossing edge.
+   */
+  const graph = {
+    "id": "root",
+    "labels": [ { "text": "root", "width": 42, "height": 20 } ],
+    "properties": {
+      "algorithm": "layered",
+      "org.eclipse.elk.hierarchyHandling": "INCLUDE_CHILDREN",
+    },
+    "children": [
+      {
+        "id": "Q",
+        "labels": [{"text": "Q", "width": 12, "height": 20}],
+        "children": [
+          {
+            "id": "A", "width": 30, "height": 30,
+            "labels": [{"text": "A", "width": 12, "height": 20}],
+            "edges": [
+              {"id": "e", "sources": ["A"], "targets": ["C"]}
+            ]
+          },
+          {
+            "id": "B",
+            "labels": [{"text": "B", "width": 12, "height": 20}],
+            "children": [
+              {
+                "id": "C", "width": 30, "height": 30,
+                "labels": [{"text": "C", "width": 12, "height": 20}],
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  /* A simple function invoking `elk` to perform a layout, while setting layout options
+   * including the shape and edge coordinate modes.
+   */
+  function computeLayout(elk, shapeCoordMode, edgeCoordMode, graph) {
+    return elk.layout(graph, {
+      layoutOptions: {
+        "elk.padding": "top=20, bottom=20, left=20, right=20",
+        'json.shapeCoords': shapeCoordMode,
+        'json.edgeCoords': edgeCoordMode,
+      }
+    });
+  }
+
+  /* For the purposes of this demo page, this is our way of drawing the graph.
+   * We use custom drawing software that knows how to handle all of ELK's coordinate modes.
+   *
+   * End users should employ whatever drawing software they prefer, but must be
+   * sure to ask ELK to produce coordinates that this software will understand.
+   * Most common drawing software will probably expect either PARENT or ROOT coordinates.
+   */
+  function drawGraph(shapeCoordMode, edgeCoordMode, g) {
+    const drawer = new SimpleGraphDrawer({
+      shapeCoordMode: shapeCoordMode,
+      edgeCoordMode: edgeCoordMode
+    });
+    return drawer.draw(g);
+  }
+
+  /* Spell out the node and edge coordinates, so users can examine and interpret them.
+   */
+  function showCoords(g) {
+    const coords = document.createElement('div');
+    const Q = g.children[0];
+    const s = Q.children[0].edges[0].sections[0];
+    coords.innerHTML = `
+    <pre>
+    Q: (${Q.x}, ${Q.y})
+    A: (${Q.children[0].x}, ${Q.children[0].y})
+    B: (${Q.children[1].x}, ${Q.children[1].y})
+    C: (${Q.children[1].children[0].x}, ${Q.children[1].children[0].y})
+    Edge: from (${s.startPoint.x},${s.startPoint.y}) to (${s.endPoint.x},${s.endPoint.y})
+    </pre>
+    `;
+    return coords;
+  }
+
+  /* Produce one demo block in the 3 x 2 table.
+   */
+  async function makeDemoBlock(host, elk, shapeCoordMode, edgeCoordMode, graph, {dump = true}) {
+    const g = await computeLayout(elk, shapeCoordMode, edgeCoordMode, graph);
+
+    const svg = drawGraph(shapeCoordMode, edgeCoordMode, g);
+    svg.addTo(host);
+
+    const coords = showCoords(g);
+    host.appendChild(coords);
+
+    if (dump) {
+      const rawOutput = document.createElement('div');
+      rawOutput.innerHTML = "<pre>" + JSON.stringify(g, null, " ") + "</pre>";
+      host.appendChild(rawOutput);
+    }
+  }
+
+  /* Produce the 3 x 2 demo table.
+   */
+  async function main() {
+    const elk = new ELK({
+      workerUrl: '../../lib/elk-worker.js'
+    });
+
+    const shapeCoordModes = [
+      'PARENT', 'ROOT'
+    ];
+
+    const edgeCoordModes = [
+      'PARENT', 'ROOT', 'CONTAINER',
+    ];
+
+    const table = document.createElement('table');
+    for (const ecm of edgeCoordModes) {
+      const tr = document.createElement('tr');
+      for (const scm of shapeCoordModes) {
+        const td = document.createElement('td');
+        const h = document.createElement('h2');
+        h.innerHTML = `shapeCoords: <span class="${scm}">${scm}</span>, edgeCoords: <span class="${ecm}">${ecm}</span>`;
+        td.appendChild(h);
+        await makeDemoBlock(td, elk, scm, ecm, graph, {dump: false});
+        tr.appendChild(td);
+      }
+      table.appendChild(tr);
+    }
+    document.body.appendChild(table);
+  }
+
+  main();
+</script>
+</body>
+</html>
