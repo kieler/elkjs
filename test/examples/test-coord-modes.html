@@ -127,12 +127,51 @@
     return coords;
   }
 
+  /* Draw lines from objects to their coordinate base points.
+   * This shows the coordinate system that's being used.
+   */
+  function drawCoordVectors(svg, shapeCoordMode, edgeCoordMode, rootPoints) {
+      const {root, Q, A, B, C, e0, e1} = rootPoints;
+      const rootStyle = {stroke: 'red', 'stroke-width': 2, opacity: 0.5};
+      const parentStyle = {stroke: 'blue', 'stroke-width': 2, opacity: 0.5};
+      const containerStyle = {stroke: 'green', 'stroke-width': 2, opacity: 0.5};
+      switch (shapeCoordMode) {
+          case 'ROOT':
+              svg.polyline([[Q.x, Q.y], [root.x, root.y]], rootStyle);
+              svg.polyline([[A.x, A.y], [root.x, root.y]], rootStyle);
+              svg.polyline([[B.x, B.y], [root.x, root.y]], rootStyle);
+              svg.polyline([[C.x, C.y], [root.x, root.y]], rootStyle);
+              break;
+          case 'PARENT':
+              svg.polyline([[Q.x, Q.y], [root.x, root.y]], parentStyle);
+              svg.polyline([[A.x, A.y], [Q.x, Q.y]], parentStyle);
+              svg.polyline([[B.x, B.y], [Q.x, Q.y]], parentStyle);
+              svg.polyline([[C.x, C.y], [B.x, B.y]], parentStyle);
+              break;
+      }
+      switch (edgeCoordMode) {
+          case 'ROOT':
+              svg.polyline([[e0.x, e0.y], [root.x, root.y]], rootStyle);
+              svg.polyline([[e1.x, e1.y], [root.x, root.y]], rootStyle);
+              break;
+          case 'PARENT':
+              svg.polyline([[e0.x, e0.y], [A.x, A.y]], parentStyle);
+              svg.polyline([[e1.x, e1.y], [A.x, A.y]], parentStyle);
+              break;
+          case 'CONTAINER':
+              svg.polyline([[e0.x, e0.y], [Q.x, Q.y]], containerStyle);
+              svg.polyline([[e1.x, e1.y], [Q.x, Q.y]], containerStyle);
+              break;
+      }
+  }
+
   /* Produce one demo block in the 3 x 2 table.
    */
-  async function makeDemoBlock(host, elk, shapeCoordMode, edgeCoordMode, graph, {dump = true}) {
+  async function makeDemoBlock(host, elk, shapeCoordMode, edgeCoordMode, graph, rootPoints, {dump = true}) {
     const g = await computeLayout(elk, shapeCoordMode, edgeCoordMode, graph);
 
     const svg = drawGraph(shapeCoordMode, edgeCoordMode, g);
+    drawCoordVectors(svg, shapeCoordMode, edgeCoordMode, rootPoints);
     svg.addTo(host);
 
     const coords = showCoords(g);
@@ -143,6 +182,22 @@
       rawOutput.innerHTML = "<pre>" + JSON.stringify(g, null, " ") + "</pre>";
       host.appendChild(rawOutput);
     }
+  }
+
+  /* Compute all coordinates in root/root mode, and package them for easy access.
+   */
+  async function getRootCoords(elk, graph) {
+    const g = await computeLayout(elk, "ROOT", "ROOT", graph);
+    const points = {};
+    points.root = g;
+    points.Q = g.children[0];
+    points.A = points.Q.children[0];
+    points.B = points.Q.children[1];
+    points.C = points.B.children[0];
+    const s = points.Q.children[0].edges[0].sections[0];
+    points.e0 = s.startPoint;
+    points.e1 = s.endPoint;
+    return points;
   }
 
   /* Produce the 3 x 2 demo table.
@@ -160,6 +215,8 @@
       'PARENT', 'ROOT', 'CONTAINER',
     ];
 
+    const rp = await getRootCoords(elk, graph);
+
     const table = document.createElement('table');
     for (const ecm of edgeCoordModes) {
       const tr = document.createElement('tr');
@@ -168,7 +225,7 @@
         const h = document.createElement('h2');
         h.innerHTML = `shapeCoords: <span class="${scm}">${scm}</span>, edgeCoords: <span class="${ecm}">${ecm}</span>`;
         td.appendChild(h);
-        await makeDemoBlock(td, elk, scm, ecm, graph, {dump: false});
+        await makeDemoBlock(td, elk, scm, ecm, graph, rp, {dump: false});
         tr.appendChild(td);
       }
       table.appendChild(tr);
