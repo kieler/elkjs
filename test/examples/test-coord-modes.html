@@ -6,6 +6,9 @@
     body {
       font-family: monospace;
     }
+    h1 {
+        line-height: 2em;
+    }
     table {
       border-spacing: 5em 0;
     }
@@ -18,13 +21,25 @@
     span.CONTAINER {
       color: green;
     }
+    #graph-dump {
+        margin: 2em 6em;
+        background-color: #eee;
+        padding: 2em;
+        font-size: small;
+        border: 1px solid #ddd;
+    }
   </style>
 </head>
 <body>
 <h1>Coordinate Mode Demonstrator</h1>
 <pre>
   This demonstrates use of the different shape and edge coordinate modes.
+  Please see this page's source code for further hints.
 
+  We draw the following graph:
+</pre>
+<pre id="graph-dump"></pre>
+<pre>
   Notes:
 
   1. In the input JSON, we defined the edge inside node A for demonstration purposes.
@@ -42,6 +57,7 @@
   4. You can use software of your choice to draw the graph, but it must
      work with the type of coordinates you tell ELK to use.
 </pre>
+<h1>Drawing in the Different Coordinate Modes</h1>
 <script type="text/javascript">
   /* This is our demo graph.
    * It contains just enough structure to demonstrate the differences between
@@ -200,9 +216,15 @@
     return points;
   }
 
+  function showRawGraphInput() {
+      document.querySelector('#graph-dump').innerText = JSON.stringify(graph, null, 4);
+  }
+
   /* Produce the 3 x 2 demo table.
    */
   async function main() {
+    showRawGraphInput();
+
     const elk = new ELK({
       workerUrl: '../../lib/elk-worker.js'
     });
