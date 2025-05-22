@@ -36,7 +36,7 @@ const EdgeCoordModes = {
  * For that you can use its methods, or access its svg element `s.svg` directly.
  * You can use `s.addTo()` to add the svg element to a web page.
  */
-class SimpleGraphDrawer {
+class SimpleElkGraphDrawer {
 
     constructor({
         nodeStyle = {stroke: "black", fill: "none"},

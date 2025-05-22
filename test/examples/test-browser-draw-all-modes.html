@@ -1,7 +1,7 @@
 <html>
 <head>
   <script src="../../lib/elk-api.js"></script>
-  <script src="SimpleGraphDrawer.js"></script>
+  <script src="SimpleElkGraphDrawer.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -44,7 +44,7 @@
     graph.properties['org.eclipse.elk.json.shapeCoords'] = shapeCoordMode
     graph.properties['org.eclipse.elk.json.edgeCoords'] = edgeCoordMode
 
-    const drawer = new SimpleGraphDrawer({
+    const drawer = new SimpleElkGraphDrawer({
       edgeStyle: {stroke: "red"},
       shapeCoordMode: shapeCoordMode,
       edgeCoordMode: edgeCoordMode

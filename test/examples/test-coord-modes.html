@@ -1,7 +1,7 @@
 <html>
 <head>
   <script src="../../lib/elk-api.js"></script>
-  <script src="SimpleGraphDrawer.js"></script>
+  <script src="SimpleElkGraphDrawer.js"></script>
   <style>
     body {
       font-family: monospace;
@@ -118,7 +118,7 @@
    * Most common drawing software will probably expect either PARENT or ROOT coordinates.
    */
   function drawGraph(shapeCoordMode, edgeCoordMode, g) {
-    const drawer = new SimpleGraphDrawer({
+    const drawer = new SimpleElkGraphDrawer({
       shapeCoordMode: shapeCoordMode,
       edgeCoordMode: edgeCoordMode
     });
