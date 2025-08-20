@@ -154,7 +154,7 @@ public class ElkJs implements EntryPoint {
             } else if (alg.equals("rectpacking")) {
                 SERVICE.registerLayoutMetaDataProviders(new RectPackingMetaDataProvider());
             } else if (alg.equals("vertiflex")) {
-                SERVICE.registerLayoutMetaDataProviders(new VertiflexMetaDataProvider());
+                SERVICE.registerLayoutMetaDataProviders(new VertiFlexMetaDataProvider());
             }
         }
     }
