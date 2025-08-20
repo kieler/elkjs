@@ -32,6 +32,7 @@ import org.eclipse.elk.alg.mrtree.options.*;
 import org.eclipse.elk.alg.radial.options.*;
 import org.eclipse.elk.alg.spore.options.*;
 import org.eclipse.elk.alg.rectpacking.options.*;
+import org.eclipse.elk.alg.vertiflex.options.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -152,6 +153,8 @@ public class ElkJs implements EntryPoint {
                 SERVICE.registerLayoutMetaDataProviders(new SporeMetaDataProvider());
             } else if (alg.equals("rectpacking")) {
                 SERVICE.registerLayoutMetaDataProviders(new RectPackingMetaDataProvider());
+            } else if (alg.equals("vertiflex")) {
+                SERVICE.registerLayoutMetaDataProviders(new VertiflexMetaDataProvider());
             }
         }
     }

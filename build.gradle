@@ -76,7 +76,8 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.rectpacking/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.radial/src",
-  "${elkRepo}/plugins/org.eclipse.elk.alg.spore/src"
+  "${elkRepo}/plugins/org.eclipse.elk.alg.spore/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.vertiflex/src"
 ]
 
 // the directory to which all sources are copied for compilation
