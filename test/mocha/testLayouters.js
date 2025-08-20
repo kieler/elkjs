@@ -72,4 +72,12 @@ describe('Layout Algorithms', function() {
     }).should.eventually.be.fulfilled
   })
 
+    it('Rectangle Packing', function() {
+    return elk.layout(graphOverlapping, {
+      layoutOptions: {
+        'algorithm': 'elk.vertiflex'
+      }
+    }).should.eventually.be.fulfilled
+  })
+
 })

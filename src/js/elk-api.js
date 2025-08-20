@@ -20,7 +20,8 @@ export default class ELK {
         'disco',
         'sporeOverlap',
         'sporeCompaction',
-        'rectpacking'
+        'rectpacking',
+        'vertiflex',
     ],
     workerFactory,
     workerUrl
