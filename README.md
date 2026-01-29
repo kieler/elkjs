@@ -345,8 +345,8 @@ npm run test
 git tag 0.x.x
 # Push release branch and tags to remote
 git push --tags --set-upstream origin releases/0.x.x
-# Create a new release on Github for the new tag and afterwards publish to npm 
-npm publish --tag=latest
+# Create a new release on Github for the new tag and afterwards publish to npm
+Once the release is published with on Github, the release on npm will be automatically triggered
 ```
 Afterwards the following version numbers have to be changed to the next release number:
 * `version` in `package.json`,
