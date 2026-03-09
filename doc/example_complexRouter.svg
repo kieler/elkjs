@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="sprotty_G1"
    class="sprotty-graph"
    style="font-size:14px;line-height:20px"
    version="1.1"
-   viewBox="0 0 981.97878 504.16666"
-   inkscape:version="0.48.4 r9939"
-   width="100%"
-   height="100%"
-   sodipodi:docname="diagram (1).svg">
+   viewBox="0 0 992.03292 504.16666"
+   inkscape:version="1.4.3 (1:1.4.3+202512261035+0d15f75042)"
+   width="992.0329"
+   height="504.16666"
+   sodipodi:docname="example_complexRouter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata395">
     <rdf:RDF>
@@ -38,8 +38,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1832"
-     inkscape:window-height="1057"
+     inkscape:window-width="2494"
+     inkscape:window-height="1371"
      id="namedview391"
      showgrid="false"
      fit-margin-top="0"
@@ -47,13 +47,17 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="0.9573138"
-     inkscape:cx="443.49999"
-     inkscape:cy="360.98835"
-     inkscape:window-x="80"
-     inkscape:window-y="-8"
+     inkscape:cx="443.95056"
+     inkscape:cy="360.3834"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="sprotty_G1" />
-  <style>
+     inkscape:current-layer="sprotty_G1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <style
+     id="style1">
     .elknode {
       fill: #ddddff;
       stroke: #444488;
@@ -186,58 +190,51 @@
      id="path46"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 485.49999,155 32,0" />
+     d="m 485.5,155 h 32" />
   <path
      inkscape:connector-curvature="0"
      id="path48"
      class="edge arrow"
-     d="m 517.49999,155 -8,3 0,-6 z" />
+     d="m 517.5,155 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path51"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 485.49999,155 22,0 0,-43.33333 97,0 0,35.16667 10,0" />
+     d="m 485.5,155 h 22 v -43.33333 h 97 v 35.16667 h 10" />
   <path
      inkscape:connector-curvature="0"
      id="path53"
      class="edge arrow"
-     d="m 614.49999,146.83334 -8,3 0,-6 z" />
+     d="m 614.5,146.83334 -8,3 v -6 z" />
   <circle
-     r="2"
+     r="0"
      class="elkjunction"
-     style=""
      id="circle56"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
-     cx="0"
-     cy="0"
-     sodipodi:cx="0"
-     sodipodi:cy="0"
-     sodipodi:rx="2"
-     sodipodi:ry="2"
-     transform="translate(507.49999,155)" />
+     cx="507.5"
+     cy="155" />
   <path
      inkscape:connector-curvature="0"
      id="path59"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 594.49999,163.16667 20,0" />
+     d="m 594.5,163.16667 h 20" />
   <path
      inkscape:connector-curvature="0"
      id="path61"
      class="edge arrow"
-     d="m 614.49999,163.16667 -8,3 0,-6 z" />
+     d="m 614.5,163.16667 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path64"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 640.49999,155 106,0" />
+     d="m 640.5,155 h 106" />
   <path
      inkscape:connector-curvature="0"
      id="path66"
      class="edge arrow"
-     d="m 746.49999,155 -8,3 0,-6 z" />
+     d="m 746.5,155 -8,3 v -6 z" />
   <rect
      x="549.25"
      y="235.66667"
@@ -371,58 +368,51 @@
      id="path122"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 485.49999,453 32,0" />
+     d="m 485.5,453 h 32" />
   <path
      inkscape:connector-curvature="0"
      id="path124"
      class="edge arrow"
-     d="m 517.49999,453 -8,3 0,-6 z" />
+     d="m 517.5,453 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path127"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 485.49999,453 22,0 0,-43.33333 97,0 0,35.16667 10,0" />
+     d="m 485.5,453 h 22 v -43.33333 h 97 v 35.16667 h 10" />
   <path
      inkscape:connector-curvature="0"
      id="path129"
      class="edge arrow"
-     d="m 614.49999,444.83334 -8,3 0,-6 z" />
+     d="m 614.5,444.83334 -8,3 v -6 z" />
   <circle
-     r="2"
+     r="0"
      class="elkjunction"
-     style=""
      id="circle132"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
-     cx="0"
-     cy="0"
-     sodipodi:cx="0"
-     sodipodi:cy="0"
-     sodipodi:rx="2"
-     sodipodi:ry="2"
-     transform="translate(507.49999,453)" />
+     cx="507.5"
+     cy="453" />
   <path
      inkscape:connector-curvature="0"
      id="path135"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 594.49999,461.16667 20,0" />
+     d="m 594.5,461.16667 h 20" />
   <path
      inkscape:connector-curvature="0"
      id="path137"
      class="edge arrow"
-     d="m 614.49999,461.16667 -8,3 0,-6 z" />
+     d="m 614.5,461.16667 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path140"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 640.49999,453 106,0" />
+     d="m 640.5,453 h 106" />
   <path
      inkscape:connector-curvature="0"
      id="path142"
      class="edge arrow"
-     d="m 746.49999,453 -8,3 0,-6 z" />
+     d="m 746.5,453 -8,3 v -6 z" />
   <rect
      x="549.25"
      y="316.66666"
@@ -456,7 +446,7 @@
      y="333.16666"
      x="610.25" />
   <rect
-     x="134.49998"
+     x="134.5"
      y="232.39999"
      width="61"
      height="41"
@@ -470,7 +460,7 @@
      height="8"
      width="8"
      y="248.89999"
-     x="195.49998" />
+     x="195.5" />
   <rect
      id="rect165"
      style="stroke-width:1"
@@ -478,7 +468,7 @@
      height="8"
      width="8"
      y="240.73334"
-     x="126.49999" />
+     x="126.5" />
   <rect
      id="rect168"
      style="stroke-width:1"
@@ -486,7 +476,7 @@
      height="8"
      width="8"
      y="257.06668"
-     x="126.49999" />
+     x="126.5" />
   <rect
      x="837.5"
      y="235.66667"
@@ -520,7 +510,7 @@
      y="333.16666"
      x="829.5" />
   <rect
-     x="8.4999905"
+     x="8.5"
      y="211.98334"
      width="61"
      height="41"
@@ -534,7 +524,7 @@
      height="8"
      width="8"
      y="216.23334"
-     x="69.499992" />
+     x="69.5" />
   <rect
      id="rect192"
      style="stroke-width:1"
@@ -542,7 +532,7 @@
      height="8"
      width="8"
      y="228.48334"
-     x="69.499992" />
+     x="69.5" />
   <rect
      id="rect195"
      style="stroke-width:1"
@@ -550,7 +540,7 @@
      height="8"
      width="8"
      y="240.73334"
-     x="69.499992" />
+     x="69.5" />
   <rect
      id="rect198"
      style="stroke-width:1"
@@ -558,7 +548,7 @@
      height="8"
      width="8"
      y="228.48334"
-     x="0.49999085" />
+     x="0.5" />
   <rect
      x="348.5"
      y="31.5"
@@ -576,7 +566,7 @@
      y="43"
      x="340.5" />
   <rect
-     x="231.49998"
+     x="231.5"
      y="227.5"
      width="61"
      height="41"
@@ -590,7 +580,7 @@
      height="8"
      width="8"
      y="229.3"
-     x="223.49998" />
+     x="223.5" />
   <rect
      id="rect215"
      style="stroke-width:1"
@@ -606,7 +596,7 @@
      height="8"
      width="8"
      y="239.10001"
-     x="223.49998" />
+     x="223.5" />
   <rect
      id="rect221"
      style="stroke-width:1"
@@ -614,7 +604,7 @@
      height="8"
      width="8"
      y="248.89999"
-     x="223.49998" />
+     x="223.5" />
   <rect
      id="rect224"
      style="stroke-width:1"
@@ -622,7 +612,7 @@
      height="8"
      width="8"
      y="258.70001"
-     x="223.49998" />
+     x="223.5" />
   <rect
      id="rect227"
      style="stroke-width:1"
@@ -700,23 +690,23 @@
      id="path256"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 348.49999,155 12,0" />
+     d="m 348.5,155 h 12" />
   <path
      inkscape:connector-curvature="0"
      id="path258"
      class="edge arrow"
-     d="m 360.49999,155 -8,3 0,-6 z" />
+     d="m 360.5,155 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path261"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 437.49999,155 12,0" />
+     d="m 437.5,155 h 12" />
   <path
      inkscape:connector-curvature="0"
      id="path263"
      class="edge arrow"
-     d="m 449.49999,155 -8,3 0,-6 z" />
+     d="m 449.5,155 -8,3 v -6 z" />
   <rect
      x="348.5"
      y="400.5"
@@ -751,11 +741,11 @@
      x="368.5" />
   <g
      id="g3996"
-     transform="translate(-11.500009,-11.5)">
+     transform="translate(-11.5,-11.5)">
     <text
        y="103.16667"
        x="497"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N1.L1">channel1</text>
     <text
@@ -763,29 +753,29 @@
        x="537"
        id="sprotty_G1.N1.N2.L2"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Counter</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Counter</text>
     <text
        y="138"
        x="634"
        id="sprotty_G1.N1.N3.L3"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">RecordAssembler</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">RecordAssembler</text>
     <text
        y="143"
        x="766"
        id="sprotty_G1.N1.N4.L4"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Display</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Display</text>
     <text
        y="239.16667"
        x="560.75"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N5.L5">Counter - q1</text>
     <text
        y="401.16666"
        x="497"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N6.L6">channel2</text>
     <text
@@ -793,65 +783,65 @@
        x="537"
        id="sprotty_G1.N6.N7.L7"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Counter</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Counter</text>
     <text
        y="436"
        x="634"
        id="sprotty_G1.N6.N8.L8"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">RecordAssembler</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">RecordAssembler</text>
     <text
        y="441"
        x="766"
        id="sprotty_G1.N6.N9.L9"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Display</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Display</text>
     <text
        y="320.16666"
        x="560.75"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N10.L10">Counter - q2</text>
     <text
        y="235.89999"
        x="146"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N11.L11">Ramp</text>
     <text
        y="239.16667"
        x="849"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N12.L12">MonitorValue - q1 length</text>
     <text
        y="320.16666"
        x="849"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N13.L13">MonitorValue - q2 length</text>
     <text
        y="215.48334"
        x="20"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N14.L14">DatagramReader</text>
     <text
        y="35"
        x="360"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N15.L15">Display</text>
     <text
        y="231"
        x="243"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N16.L16">QueueControl</text>
     <text
        y="106"
        x="360"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N17.L17">Interface - fast</text>
     <text
@@ -859,11 +849,11 @@
        x="380"
        id="sprotty_G1.N17.N18.L18"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Sleep</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Sleep</text>
     <text
        y="404"
        x="360"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif"
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px"
        class="elklabel"
        id="sprotty_G1.N19.L19">Interface - slow</text>
     <text
@@ -871,7 +861,7 @@
        x="380"
        id="sprotty_G1.N19.N20.L20"
        class="elklabel"
-       style="font-size:13.33329964px;line-height:19.04759979px;stroke-width:0px;font-family:sans-serif">Sleep</text>
+       style="font-size:13.3333px;line-height:0%;font-family:sans-serif;stroke-width:0px">Sleep</text>
   </g>
   <rect
      x="360.5"
@@ -902,264 +892,222 @@
      id="path289"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 348.49999,453 12,0" />
+     d="m 348.5,453 h 12" />
   <path
      inkscape:connector-curvature="0"
      id="path291"
      class="edge arrow"
-     d="m 360.49999,453 -8,3 0,-6 z" />
+     d="m 360.5,453 -8,3 v -6 z" />
   <path
      inkscape:connector-curvature="0"
      id="path294"
      style="fill:none;stroke-width:1"
      class="elkedge"
-     d="m 437.49999,453 12,0" />
+     d="m 437.5,453 h 12" />
   <path
      inkscape:connector-curvature="0"
      id="path296"
      class="edge arrow"
-     d="m 449.49999,453 -8,3 0,-6 z" />
+     d="m 449.5,453 -8,3 v -6 z" />
   <path
-     d="m 618.24999,256.16667 211.25,0"
+     d="M 618.25,256.16667 H 829.5"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path299"
      inkscape:connector-curvature="0" />
   <path
-     d="m 829.49999,256.16667 -8,3 0,-6 z"
+     d="m 829.5,256.16667 -8,3 v -6 z"
      class="edge arrow"
      id="path301"
      inkscape:connector-curvature="0" />
   <path
-     d="m 618.24999,256.16667 201.25,0 0,-255.66667 -606,0 0,242.6 10,0"
+     d="M 618.25,256.16667 H 819.5 V 0.5 h -606 v 242.6 h 10"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path304"
      inkscape:connector-curvature="0" />
   <path
-     d="m 223.49999,243.1 -8,3 0,-6 z"
+     d="m 223.5,243.1 -8,3 v -6 z"
      class="edge arrow"
      id="path306"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="256.16666"
+     cx="819.5"
      id="circle309"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(819.49999,256.16667)" />
+     r="0" />
   <path
-     d="m 618.24999,337.16667 211.25,0"
+     d="M 618.25,337.16667 H 829.5"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path312"
      inkscape:connector-curvature="0" />
   <path
-     d="m 829.49999,337.16667 -8,3 0,-6 z"
+     d="m 829.5,337.16667 -8,3 v -6 z"
      class="edge arrow"
      id="path314"
      inkscape:connector-curvature="0" />
   <path
-     d="m 618.24999,337.16667 201.25,0 0,166.5 -606,0 0,-240.96667 10,0"
+     d="M 618.25,337.16667 H 819.5 v 166.5 h -606 V 262.7 h 10"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path317"
      inkscape:connector-curvature="0" />
   <path
-     d="m 223.49999,262.7 -8,3 0,-6 z"
+     d="m 223.5,262.7 -8,3 v -6 z"
      class="edge arrow"
      id="path319"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="337.16666"
+     cx="819.5"
      id="circle322"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(819.49999,337.16667)" />
+     r="0" />
   <path
-     d="m 203.49999,252.9 20,0"
+     d="m 203.5,252.9 h 20"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path325"
      inkscape:connector-curvature="0" />
   <path
-     d="m 223.49999,252.9 -8,3 0,-6 z"
+     d="m 223.5,252.9 -8,3 v -6 z"
      class="edge arrow"
      id="path327"
      inkscape:connector-curvature="0" />
   <path
-     d="m 77.499991,244.73333 48.999999,0"
+     d="m 77.5,244.73333 h 49"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path330"
      inkscape:connector-curvature="0" />
   <path
-     d="m 126.49999,244.73333 -8,3 0,-6 z"
+     d="m 126.5,244.73333 -8,3 v -6 z"
      class="edge arrow"
      id="path332"
      inkscape:connector-curvature="0" />
   <path
-     d="m 300.49999,248 240.75,0"
+     d="M 300.5,248 H 541.25"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path335"
      inkscape:connector-curvature="0" />
   <path
-     d="m 541.24999,248 -8,3 0,-6 z"
+     d="m 541.25,248 -8,3 v -6 z"
      class="edge arrow"
      id="path337"
      inkscape:connector-curvature="0" />
   <path
-     d="m 300.49999,248 30,0 0,-93 10,0"
+     d="m 300.5,248 h 30 v -93 h 10"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path340"
      inkscape:connector-curvature="0" />
   <path
-     d="m 340.49999,155 -8,3 0,-6 z"
+     d="m 340.5,155 -8,3 v -6 z"
      class="edge arrow"
      id="path342"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="248"
+     cx="330.5"
      id="circle345"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(330.49999,248)" />
+     r="0" />
   <path
-     d="m 300.49999,260.25 20,0 0,68.75 220.75,0"
+     d="m 300.5,260.25 h 20 V 329 h 220.75"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path348"
      inkscape:connector-curvature="0" />
   <path
-     d="m 541.24999,329 -8,3 0,-6 z"
+     d="m 541.25,329 -8,3 v -6 z"
      class="edge arrow"
      id="path350"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="329"
+     cx="320.5"
      id="circle353"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(320.49999,329)" />
+     r="0" />
   <path
-     d="m 300.49999,260.25 20,0 0,192.75 20,0"
+     d="m 300.5,260.25 h 20 V 453 h 20"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path356"
      inkscape:connector-curvature="0" />
   <path
-     d="m 340.49999,453 -8,3 0,-6 z"
+     d="m 340.5,453 -8,3 v -6 z"
      class="edge arrow"
      id="path358"
      inkscape:connector-curvature="0" />
   <path
-     d="m 300.49999,235.75 20,0 0,-188.75 20,0"
+     d="m 300.5,235.75 h 20 V 47 h 20"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path361"
      inkscape:connector-curvature="0" />
   <path
-     d="m 340.49999,47 -8,3 0,-6 z"
+     d="m 340.5,47 -8,3 v -6 z"
      class="edge arrow"
      id="path363"
      inkscape:connector-curvature="0" />
   <path
-     d="m 457.49999,155 20,0"
+     d="m 457.5,155 h 20"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path366"
      inkscape:connector-curvature="0" />
   <path
-     d="m 477.49999,155 -8,3 0,-6 z"
+     d="m 477.5,155 -8,3 v -6 z"
      class="edge arrow"
      id="path368"
      inkscape:connector-curvature="0" />
   <path
-     d="m 457.49999,155 10,0 0,109.33333 73.75,0"
+     d="m 457.5,155 h 10 v 109.33333 h 73.75"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path371"
      inkscape:connector-curvature="0" />
   <path
-     d="m 541.24999,264.33333 -8,3 0,-6 z"
+     d="m 541.25,264.33333 -8,3 v -6 z"
      class="edge arrow"
      id="path373"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="155"
+     cx="467.5"
      id="circle376"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(467.49999,155)" />
+     r="0" />
   <path
-     d="m 457.49999,453 20,0"
+     d="m 457.5,453 h 20"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path379"
      inkscape:connector-curvature="0" />
   <path
-     d="m 477.49999,453 -8,3 0,-6 z"
+     d="m 477.5,453 -8,3 v -6 z"
      class="edge arrow"
      id="path381"
      inkscape:connector-curvature="0" />
   <path
-     d="m 457.49999,453 10,0 0,-107.66667 73.75,0"
+     d="m 457.5,453 h 10 V 345.33333 h 73.75"
      class="elkedge"
      style="fill:none;stroke-width:1"
      id="path384"
      inkscape:connector-curvature="0" />
   <path
-     d="m 541.24999,345.33333 -8,3 0,-6 z"
+     d="m 541.25,345.33333 -8,3 v -6 z"
      class="edge arrow"
      id="path386"
      inkscape:connector-curvature="0" />
   <circle
-     sodipodi:ry="2"
-     sodipodi:rx="2"
-     sodipodi:cy="0"
-     sodipodi:cx="0"
-     cy="0"
-     cx="0"
-     d="M 2,0 C 2,1.1045695 1.1045695,2 0,2 -1.1045695,2 -2,1.1045695 -2,0 c 0,-1.1045695 0.8954305,-2 2,-2 1.1045695,0 2,0.8954305 2,2 z"
+     cy="453"
+     cx="467.5"
      id="circle389"
-     style=""
      class="elkjunction"
-     r="2"
-     transform="translate(467.49999,453)" />
+     r="0" />
 </svg>
