@@ -60,7 +60,10 @@ public abstract class TAbstractList<E> extends TAbstractCollection<E> implements
                 removeIndex = -1;
             }
             private void checkConcurrentModification() {
-                if (modCount < TAbstractList.this.modCount) {
+                // Fix TeaVM's fail-fast check to match OpenJDK AbstractList iterator semantics
+                // (same behavior in current LTS lines such as JDK 17 and JDK 21): any mod-count mismatch
+                // is concurrent modification, not only increments beyond the iterator's expected count.
+                if (modCount != TAbstractList.this.modCount) {
                     throw new TConcurrentModificationException();
                 }
             }
@@ -198,7 +201,9 @@ public abstract class TAbstractList<E> extends TAbstractCollection<E> implements
         private int sz;
         public TListIteratorImpl(int i, int lastModCount, int sz) {
             this.i = i;
-            this.j = i;
+            // Fix TeaVM bug to match OpenJDK ListIterator state rules (e.g. JDK 17/JDK 21):
+            // no element has been returned yet, so set/remove must fail until next/previous is called.
+            this.j = -1;
             this.lastModCount = lastModCount;
             this.sz = sz;
         }
@@ -224,6 +229,9 @@ public abstract class TAbstractList<E> extends TAbstractCollection<E> implements
             }
             --sz;
             lastModCount = modCount;
+            // Match OpenJDK ListIterator semantics (e.g. JDK 17/JDK 21):
+            // remove invalidates the last-returned slot for a subsequent set/remove.
+            j = -1;
         }
         @Override public boolean hasPrevious() {
             return i > 0;
@@ -234,7 +242,11 @@ public abstract class TAbstractList<E> extends TAbstractCollection<E> implements
             if (j < 0) {
                 throw new TNoSuchElementException();
             }
-            return get((i--) - 1);
+            // Fix TeaVM cursor bookkeeping to match OpenJDK ListIterator.previous()
+            // (same behavior in JDK 17/JDK 21): move the cursor back first and report that element
+            // as the last returned one.
+            i = j;
+            return get(j);
         }
         @Override public int nextIndex() {
             return i;
@@ -250,12 +262,20 @@ public abstract class TAbstractList<E> extends TAbstractCollection<E> implements
             TAbstractList.this.set(j, e);
         }
         @Override public void add(E e) {
-            TAbstractList.this.add(i++, e);
+            // Match OpenJDK fail-fast behavior (e.g. JDK 17/JDK 21):
+            // iterator.add must detect external structural changes before mutating.
+            checkConcurrentModification();
+            TAbstractList.this.add(i, e);
+            ++i;
+            // Fix TeaVM bug: iterator.add changes the visible iterator size and must update the cached bound.
+            ++sz;
             lastModCount = modCount;
             j = -1;
         }
         private void checkConcurrentModification() {
-            if (lastModCount < modCount) {
+            // Fix TeaVM's fail-fast check to match OpenJDK AbstractList bidirectional iterator semantics
+            // (same behavior in JDK 17/JDK 21) as well.
+            if (lastModCount != modCount) {
                 throw new TConcurrentModificationException();
             }
         }

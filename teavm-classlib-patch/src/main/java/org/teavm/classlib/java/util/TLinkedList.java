@@ -18,10 +18,11 @@ package org.teavm.classlib.java.util;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import org.teavm.classlib.java.lang.TCloneable;
 import org.teavm.classlib.java.util.function.TUnaryOperator;
 import org.teavm.classlib.java.util.stream.TStream;
 
-public class TLinkedList<E> extends TAbstractSequentialList<E> implements TDeque<E> {
+public class TLinkedList<E> extends TAbstractSequentialList<E> implements TDeque<E>, TCloneable {
     static class Entry<E> {
         E item;
         Entry<E> next;
