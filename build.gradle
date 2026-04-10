@@ -128,7 +128,21 @@ sourceSets {
       srcDirs = [ srcDir ]
     }
   }
+
+  layoutEqualitySmoke {
+    java {
+      srcDirs = [ 'test/smoke', "${elkRepo}/plugins/org.eclipse.elk.graph.json/src", "$buildDir/xtend/layoutEqualitySmoke" ]
+      include 'LayoutDump.java'
+      include 'org/eclipse/elk/graph/json/**'
+    }
+
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
 }
+
+configurations.layoutEqualitySmokeImplementation.extendsFrom(configurations.implementation)
+configurations.layoutEqualitySmokeRuntimeOnly.extendsFrom(configurations.runtimeOnly)
 
 def gwtClasspath = [
       // gwt requires the folder structure to equal the package structure
@@ -210,6 +224,8 @@ dependencies {
   teavmImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
   teavmImplementation project(':teavm-classlib-patch')
   teavmClasspath project(':teavm-classlib-patch')
+
+  layoutEqualitySmokeImplementation 'com.google.code.gson:gson:2.13.1'
 }
 
 configurations.teavmClasspath.exclude group: 'org.gwtproject', module: 'gwt-user'
@@ -379,6 +395,28 @@ task copyWasmRuntimeModule {
 
 task wasmLib(dependsOn: [ lib, buildWasmGC, copyWasmRuntime, copyWasmRuntimeModule ])
 
+task layoutEqualitySmokeJar(type: Jar) {
+  group = 'verification'
+  description = 'Build a standalone shaded jar to be used by the layout equality smoke test.'
+  dependsOn layoutEqualitySmokeClasses
+  archiveBaseName = 'layout-equality-smoke'
+  archiveClassifier = 'all'
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+  manifest {
+    attributes 'Main-Class': 'LayoutDump'
+  }
+
+  from {
+    sourceSets.layoutEqualitySmoke.runtimeClasspath.findAll { it.exists() }.collect { entry ->
+      entry.isDirectory() ? entry : zipTree(entry)
+    }
+  }
+
+  exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA'
+}
+
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //                      Task Dependencies
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -388,6 +426,7 @@ generateXtextXtext.dependsOn copyEmul
 copyMelk.dependsOn generateXtextXtext
 compileJava.dependsOn copyMelk
 compileJava.dependsOn copyElkJs
+compileLayoutEqualitySmokeJava.dependsOn compileJava
 compileTeavmJava.dependsOn copyMelk
 gwtc.dependsOn compileJava
 gwtcMinified.dependsOn compileJava

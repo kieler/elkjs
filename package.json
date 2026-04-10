@@ -52,7 +52,9 @@
     "wasm:entrypoints": "node scripts/build-wasm-entrypoints.mjs",
     "build": "npm run gradle && npm run js && npm run wasm:entrypoints",
     "clean": "./gradlew clean && rm -r lib",
-    "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
+    "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\"",
+    "layoutEquality:buildShadowJar": "./gradlew layoutEqualitySmokeJar",
+    "layoutEquality": "node test/smoke/compare-layouts.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.4",
