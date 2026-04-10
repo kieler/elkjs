@@ -15,8 +15,7 @@ chai.should();
 var assert = chai.assert;
 var expect = chai.expect;
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
 const simpleGraph = {
     id: "root",
@@ -32,12 +31,19 @@ const simpleGraph = {
     }]
 };
 
-describe('Logging', function() {
+describe(`Logging (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
 
   describe('#layout(...)', function() {
 
     it('should provide logs if requested to.', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         layoutOptions: {
           'algorithm': 'stress'
         },
@@ -54,7 +60,7 @@ describe('Logging', function() {
     })
 
     it('should not provide logs if not requested to.', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         logging: false
       })
         .should.eventually.be.fulfilled
@@ -64,7 +70,7 @@ describe('Logging', function() {
     })
 
     it('should provide execution times if requested to.', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         layoutOptions: {
           'algorithm': 'layered'
         },
@@ -78,7 +84,7 @@ describe('Logging', function() {
     })
 
     it('should not provide execution times if not requested to.', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         measureExecutionTime: false
       })
         .should.eventually.be.fulfilled
@@ -88,7 +94,7 @@ describe('Logging', function() {
     })
 
     it('should not provide logging information by default.', function() {
-      return elk.layout(simpleGraph)
+      return elk.layout(clone(simpleGraph))
         .should.eventually.be.fulfilled
         .then(function (graph) {
             expect(graph.logging).to.be.undefined
@@ -96,15 +102,16 @@ describe('Logging', function() {
     })
 
     it('should clear logging information from previous layout run.', function() {
+      const graph = clone(simpleGraph)
       // First execute with logging
-      return elk.layout(simpleGraph, {
+      return elk.layout(graph, {
         logging: true
       })
         .should.eventually.be.fulfilled
         .then(function (_) {
-            // Since the layout is applied in-place, 'simpleGraph' should contain the logging information
-            expect(simpleGraph.logging).not.to.be.undefined
-            return simpleGraph;
+            // Since the layout is applied in-place, 'graph' should contain the logging information
+            expect(graph.logging).not.to.be.undefined
+            return graph;
         })
         // Apply layout a second time without logging
         .then(function(graph) {
@@ -112,7 +119,7 @@ describe('Logging', function() {
         })
         .should.eventually.be.fulfilled
         .then(function (_) {
-          expect(simpleGraph.logging).to.be.undefined
+          expect(graph.logging).to.be.undefined
         })
     })
 

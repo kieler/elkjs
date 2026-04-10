@@ -12,10 +12,17 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
-describe('Parameters', function() {
+describe(`Parameters (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout()', function() {
 
     it('should be rejected if graph is missing', function() {

@@ -12,14 +12,21 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
-describe('elkjs#7', function() {
+describe(`elkjs#7 (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout()', function() {
 
     it('should not raise an error', function() {
-      return elk.layout(graph)
+      return elk.layout(clone(graph))
         .should.eventually.be.fulfilled
     })
 

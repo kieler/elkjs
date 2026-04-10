@@ -10,8 +10,7 @@
 const chai = require("chai")
 const expect = chai.expect
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
 const graph = {
   id: 'root',
@@ -31,10 +30,17 @@ const graphOverlapping = {
   edges: [{ id: 'e1', sources: [ 'n1' ], targets: [ 'n2' ]  }]
 }
 
-describe('Layout Algorithms', function() {
+describe(`Layout Algorithms (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
 
   it('SPOrE Compaction', function() {
-    return elk.layout(graph, {
+    return elk.layout(clone(graph), {
       layoutOptions: {
         'algorithm': 'elk.sporeCompaction',
         'elk.spacing.nodeNode': 14,
@@ -50,7 +56,7 @@ describe('Layout Algorithms', function() {
   })
 
   it('SPOrE Overlap Removal', function() {
-    return elk.layout(graphOverlapping, {
+    return elk.layout(clone(graphOverlapping), {
       layoutOptions: {
         'algorithm': 'elk.sporeOverlap',
         'elk.spacing.nodeNode': 13,
@@ -65,7 +71,7 @@ describe('Layout Algorithms', function() {
   })
 
   it('Rectangle Packing', function() {
-    return elk.layout(graphOverlapping, {
+    return elk.layout(clone(graphOverlapping), {
       layoutOptions: {
         'algorithm': 'elk.rectpacking'
       }

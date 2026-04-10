@@ -41,7 +41,7 @@ describe("Wasm entry points", function () {
         }
         failed.should.equal(true);
         await fs.copyFile(
-          path.join(__dirname, "../../lib/wasm/elkjs-wasm.wasm"),
+          path.join(__dirname, "../../../lib/wasm/elkjs-wasm.wasm"),
           wasmPath
         );
 

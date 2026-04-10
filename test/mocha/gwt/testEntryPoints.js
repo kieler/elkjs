@@ -14,7 +14,7 @@ chai.should();
 
 describe('Entry point', function() {
   describe('bundled', function() {
-    const ELK = require('../../lib/elk.bundled.js')
+    const ELK = require('../../../lib/elk.bundled.js')
     const elk = new ELK()
 
     it('should succeed.', function() {
@@ -24,7 +24,7 @@ describe('Entry point', function() {
   })
 
   describe('main entry point', function() {
-    const ELK = require('../../lib/main.js')
+    const ELK = require('../../../lib/main.js')
     const elk = new ELK()
 
     it('should succeed.', function() {
@@ -34,10 +34,10 @@ describe('Entry point', function() {
   })
 
   describe('non-minified', function() {
-    const ELK = require('../../lib/elk-api.js')
+    const ELK = require('../../../lib/elk-api.js')
     const elk = new ELK({
       workerFactory: function (_) {
-        const { Worker } = require('../../lib/elk-worker.js');
+        const { Worker } = require('../../../lib/elk-worker.js');
         return new Worker();
       }
     })
@@ -49,7 +49,7 @@ describe('Entry point', function() {
   })
 
   describe('in webworker', function() {
-    const ELK = require('../../lib/main.js')
+    const ELK = require('../../../lib/main.js')
     const elk = new ELK({
       workerUrl: './lib/elk-worker.js'
     })
@@ -62,7 +62,7 @@ describe('Entry point', function() {
   })
 
   describe('in minified webworker', function() {
-    const ELK = require('../../lib/main.js')
+    const ELK = require('../../../lib/main.js')
     const elk = new ELK({
       workerUrl: './lib/elk-worker.min.js'
     })

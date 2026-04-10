@@ -13,8 +13,7 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 chai.should()
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
 
 const simpleGraph = {
@@ -43,11 +42,19 @@ let globalLayoutOptions = {
   'elk.nodeLabels.placement': 'OUTSIDE V_TOP H_CENTER'
 }
 
-describe('klayjs#22', function() {
+describe(`klayjs#22 (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout(...)', function() {
 
     it('should place labels according to set options', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         layoutOptions: globalLayoutOptions
       })
         .should.eventually.be.fulfilled

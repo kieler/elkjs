@@ -13,37 +13,52 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 chai.should()
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, errorMatches, runtimeName, safeTerminate } = require("../support/runtime");
 
-describe('elkjs#8', function() {
+describe(`elkjs#8 (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout()', function() {
 
-    it('should not add edge sections for simple bottom-up layout ', function() {
+    it('should not add edge sections for simple bottom-up layout ', async function() {
       // Note:
       // We used to test the following here:
       //   "the edge with the id "a1:0" should have no edge sections since it requires hierarchical layout"
       // Since ELK decided to raise an exception for certain invalidly structured graphs, 
       // the test has been adjusted as below. 
-      return elk.layout(graph, {
-        layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
-      }).should.eventually.be.rejectedWith(Error)
-      .and.eventually.have.property('message')
-      .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedGraphException") !== -1)
+      try {
+        await elk.layout(clone(graph), {
+          layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
+        })
+        throw new Error("Expected layout to fail.")
+      } catch (error) {
+        expect(error).to.be.an.instanceOf(Error)
+        expect(errorMatches(error, "org.eclipse.elk.core.UnsupportedGraphException")).to.equal(true)
+      }
     })
 
-    it('should not add edge sections for simple bottom-up layout (primitive edge format)', function() {
+    it('should not add edge sections for simple bottom-up layout (primitive edge format)', async function() {
       // Note: 
       // Same change as for the test above.
-      return elk.layout(graphPrimitiveEdgeFormat, {
-        layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
-      }).should.eventually.be.rejectedWith(Error)
-      .and.eventually.have.property('message')
-      .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedGraphException") !== -1)
+      try {
+        await elk.layout(clone(graphPrimitiveEdgeFormat), {
+          layoutOptions: { 'hierarchyHandling': 'SEPARATE_CHILDREN'}
+        })
+        throw new Error("Expected layout to fail.")
+      } catch (error) {
+        expect(error).to.be.an.instanceOf(Error)
+        expect(errorMatches(error, "org.eclipse.elk.core.UnsupportedGraphException")).to.equal(true)
+      }
     })
 
     it('should add edge sections for hierarchical layout', function() {
-      return elk.layout(graph, {
+      return elk.layout(clone(graph), {
         layoutOptions: { 'hierarchyHandling': 'INCLUDE_CHILDREN'}
       }).should.eventually.be.fulfilled
         .then(function (graph) {
@@ -58,7 +73,7 @@ describe('elkjs#8', function() {
     })
 
     it('should add edge sections for hierarchical layout (primitive edge format)', function() {
-      return elk.layout(graphPrimitiveEdgeFormat, {
+      return elk.layout(clone(graphPrimitiveEdgeFormat), {
         layoutOptions: { 'hierarchyHandling': 'INCLUDE_CHILDREN'}
       }).should.eventually.be.fulfilled
         .then(function (graph) {

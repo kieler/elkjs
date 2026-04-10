@@ -12,17 +12,23 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
-describe('ChangeAwareArrayList', function() {
+describe(`ChangeAwareArrayList (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout()', function() {
-
     it('should finish', function() {
       // the graph contains quite some edges, give the test
       // a little more time
       this.timeout(5000);
-      return elk.layout(graph)
+      return elk.layout(clone(graph))
         .should.eventually.be.fulfilled
     })
 

@@ -12,9 +12,7 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
-
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
 const simpleGraph = {
   id: "root",
@@ -43,11 +41,19 @@ const simpleGraph = {
   }]
 }
 
-describe('klayjs#23', function() {
+describe(`klayjs#23 (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout(...)', function() {
 
     it('should be fine with unspecified bendpoints', function() {
-      return elk.layout(simpleGraph)
+      return elk.layout(clone(simpleGraph))
         .should.eventually.be.fulfilled
     })
 

@@ -257,6 +257,7 @@ to construct it:
 Apart from that the `ELK` offers the following methods:
 * `layout(graph, options)`
   * `graph` - the graph to be laid out in [ELK JSON](http://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html). Mandatory!
+    The input graph is updated _in place_ and the resolved value is the same graph object.
   * `options` - a configuration object. Optional.
     * `layoutOptions`: its most important purpose is to pass _global_ layout options.
       That is, layout options that are applied to every graph element unless the element specifies the option itself.

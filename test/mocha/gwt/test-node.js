@@ -15,7 +15,7 @@ chai.should();
 describe('Node.js-based layout', function() {
 
   describe('bundled', function() {
-    const ELK = require('../../lib/main.js')
+    const ELK = require('../../../lib/main.js')
     const elk = new ELK()
 
     it('should succeed.', function() {
@@ -25,7 +25,7 @@ describe('Node.js-based layout', function() {
   })
 
   describe('webworker', function() {
-    const ELK = require('../../lib/main.js')
+    const ELK = require('../../../lib/main.js')
     const elk = new ELK({
       workerUrl: './lib/elk-worker.min.js'
     })

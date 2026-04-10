@@ -15,8 +15,7 @@ chai.should();
 var assert = chai.assert;
 var expect = chai.expect;
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, errorMatches, runtimeName, safeTerminate } = require("../support/runtime");
 
 var simpleGraph = {
         id: "root",
@@ -32,12 +31,29 @@ var simpleGraph = {
       }]
     };
 
-describe('Layout Options', function() {
+let elk;
+let secondElk;
+
+before(async function() {
+  elk = await createElk();
+  secondElk = await createElk({
+    defaultLayoutOptions: {
+      'elk.layered.spacing.nodeNodeBetweenLayers': 33
+    }
+  });
+});
+
+after(function() {
+  safeTerminate(elk);
+  safeTerminate(secondElk);
+});
+
+describe(`Layout Options (${runtimeName})`, function() {
 
   describe('#layout(...)', function() {
 
     it('should respect "options"', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         layoutOptions: {
           'org.eclipse.elk.layered.spacing.nodeNodeBetweenLayers': 11
         }})
@@ -50,7 +66,7 @@ describe('Layout Options', function() {
     })
 
     it('should not override concrete layout options', function() {
-      return elk.layout(simpleGraph, {
+      return elk.layout(clone(simpleGraph), {
         layoutOptions: {
           'org.eclipse.elk.direction': 'DOWN'
         }})
@@ -68,7 +84,7 @@ describe('Layout Options', function() {
         layoutOptions: { 'elk.padding': '[left=2, top=3, right=3, bottom=2]' },
         children: [ { id: "n1", width: 10, height: 10 } ]
       }
-      return elk.layout(paddingGraph)
+      return elk.layout(clone(paddingGraph))
         .should.eventually.be.fulfilled
         .then(function (graph) {
           expect(graph.children[0].x).to.equal(2)
@@ -88,7 +104,7 @@ describe('Layout Options', function() {
           }
         ]
       }
-      return elk.layout(kvectorGraph, {
+      return elk.layout(clone(kvectorGraph), {
         layoutOptions: { 
           algorithm: 'fixed' 
         }})
@@ -113,7 +129,7 @@ describe('Layout Options', function() {
             layoutOptions: { bendPoints: "( {1,2}, {3,4} )"}
           }]
       }
-      return elk.layout(kvectorchainGraph, {
+      return elk.layout(clone(kvectorchainGraph), {
         layoutOptions: { 
           algorithm: 'fixed' 
       }})
@@ -126,16 +142,19 @@ describe('Layout Options', function() {
         })
     })
 
-    it('should raise an exception for an invalid layouter id', function() {
+    it('should raise an exception for an invalid layouter id', async function() {
       let graph = {
         id: "root",
         children: [{ id: "n1", width: 10, height: 10 }],
         layoutOptions: { algorithm: "foo.bar.baz" }
       }
-      return elk.layout(graph)
-        .should.eventually.be.rejectedWith(Error)
-        .and.eventually.have.property('message')
-        .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedConfigurationException") !== -1)
+      try {
+        await elk.layout(clone(graph))
+        throw new Error("Expected layout to fail.")
+      } catch (error) {
+        expect(error).to.be.an.instanceOf(Error)
+        expect(errorMatches(error, "org.eclipse.elk.core.UnsupportedConfigurationException")).to.equal(true)
+      }
     })
     
     it('should default to elk.layered if no layouter has been specified', function() {
@@ -144,7 +163,7 @@ describe('Layout Options', function() {
         children: [{ id: "n1", width: 10, height: 10 }],
         layoutOptions: { }
       }
-      return elk.layout(graph)
+      return elk.layout(clone(graph))
         .should.eventually.be.fulfilled
         // Note that the following does not work as the resolved layout algorithm
         // is stored in an internal property within ELK that is not exposed after layout.
@@ -157,20 +176,12 @@ describe('Layout Options', function() {
   })
 })
 
-// Test default layout options
-
-const secondElk = new ELK({
-  defaultLayoutOptions: {
-    'elk.layered.spacing.nodeNodeBetweenLayers': 33
-  }
-})
-
-describe('Global Layout Options', function() {
+describe(`Global Layout Options (${runtimeName})`, function() {
 
   describe('#layout(...)', function() {
 
     it('should respect global layout"', function() {
-      return secondElk.layout(simpleGraph)
+      return secondElk.layout(clone(simpleGraph))
         .should.eventually.be.fulfilled
         .then(function (graph) {
           // left-to-right layout, thus same y coordinate but different x coordinates

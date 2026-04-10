@@ -12,14 +12,20 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/main.js')
-const elk = new ELK()
+const { clone, createElk, runtimeName, safeTerminate } = require("../support/runtime");
 
-describe('elkjs#63', function() {
+describe(`elkjs#63 (${runtimeName})`, function() {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
+
   describe('#layout()', function() {
-
     it('COFFMAN_GRAHAM layering should cope with selfloops.', function() {
-      return elk.layout(graph)
+      return elk.layout(clone(graph))
         .should.eventually.be.fulfilled
     })
 

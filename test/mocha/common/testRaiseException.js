@@ -12,23 +12,27 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 
-const ELK = require('../../lib/elk-api.js')
-const elk = new ELK({
-  workerFactory: function (_) {
-    const { Worker } = require('../../lib/elk-worker.js');
-    return new Worker();
-  }
-})
+const { clone, createElk, errorMatches, runtimeName, safeTerminate } = require("../support/runtime");
 
+describe(`Exceptions (${runtimeName})`, function () {
+  let elk;
+  before(async function() {
+    elk = await createElk();
+  });
+  after(function() {
+    safeTerminate(elk);
+  });
 
-describe('Exceptions', function () {
   describe('#layout()', function () {
 
-    it('should report an unsupported configuration.', function () {
-      return elk.layout(graph)
-        .should.eventually.be.rejectedWith(Error)
-        .and.eventually.have.property('message')
-        .that.satisfies(msg => msg.indexOf("org.eclipse.elk.core.UnsupportedConfigurationException") !== -1)
+    it('should report an unsupported configuration.', async function () {
+      try {
+        await elk.layout(clone(graph))
+        throw new Error("Expected layout to fail.")
+      } catch (error) {
+        error.should.be.an.instanceOf(Error)
+        errorMatches(error, "org.eclipse.elk.core.UnsupportedConfigurationException").should.equal(true)
+      }
     })
 
   })
