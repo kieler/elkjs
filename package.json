@@ -40,6 +40,8 @@
   "license": "EPL-2.0",
   "scripts": {
     "test": "mocha test/mocha",
+    "test:wasm": "node test/smoke/run-wasm-layout-esm.mjs test/smoke/graph.json",
+    "test:wasm:react": "npm --prefix test/fixtures/vite-react install --no-package-lock && npm --prefix test/fixtures/vite-react run build",
     "gradle": "./gradlew lib wasmLib",
     "babel": "babel src/js/ -d build/js/",
     "browserifyApi": "browserify build/js/main-api.js -s ELK --outfile lib/elk-api.js",
