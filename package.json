@@ -8,6 +8,21 @@
   "description": "Automatic graph layout based on Sugiyama's algorithm. Specialized for data flow diagrams and ports.",
   "main": "lib/main",
   "types": "lib/main",
+  "exports": {
+    ".": {
+      "types": "./lib/main.d.ts",
+      "require": "./lib/main.js",
+      "default": "./lib/main.js"
+    },
+    "./wasm": {
+      "types": "./lib/wasm.d.ts",
+      "browser": "./lib/wasm.mjs",
+      "import": "./lib/wasm-node.mjs",
+      "default": "./lib/wasm.mjs"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib"
   ],
@@ -32,7 +47,8 @@
     "browserify": "mkdirp lib && npm run browserifyApi && npm run browserifyBundle",
     "cp": "cp build/js/elk-worker*.js lib/ && cp build/js/main-node.js lib/main.js && cp typings/*.d.ts lib/",
     "js": "npm run babel && npm run browserify && npm run cp",
-    "build": "npm run gradle && npm run js",
+    "wasm:entrypoints": "node scripts/build-wasm-entrypoints.mjs",
+    "build": "npm run gradle && npm run js && npm run wasm:entrypoints",
     "clean": "./gradlew clean && rm -r lib",
     "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
   },

@@ -132,6 +132,20 @@ const elk = new ELK({
 
 # Usage
 
+Since x.x.x the package includes an entry point 
+to use a wasm-based version of the library that is used as follows. For the legacy API, see below. 
+
+```js
+import { createELK } from 'elkjs/wasm'
+
+const elk = await createELK()
+const result = await elk.layout(graph);
+console.log(JSON.stringify(result));
+```
+
+[React/Vite Example](test/fixtures/vite-react/src/App.jsx).
+
+
 Since laying out diagrams can be a time-consuming job
 (even for the computer),
 and since we don't want to freeze your UI,
