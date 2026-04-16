@@ -18,8 +18,8 @@
 plugins {
   // The documentation of the plugin [1] states "tested up to [gradle] 7.2". 
   // [1] https://xtext.github.io/xtext-gradle-plugin/xtext-builder.html
-  id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
-  id 'org.xtext.xtend'   version '3.0.2'
+  id 'org.xtext.builder' version '4.0.0'
+  id 'org.xtext.xtend'   version '4.0.0'
   id 'java'
 }
 
@@ -72,8 +72,7 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.common/src",
   // The algorithms
-  // FIXME: DisCo breaks Github Actions for unknown reasons, see https://github.com/kieler/elkjs/issues/291
-  //"${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
@@ -112,7 +111,7 @@ sourceSets {
     java {
       srcDirs = [ "$srcDir/elk" ]
     }
-    xtendOutputDir = "$srcDir/xtend-gen"
+    xtend.outputDir = "$srcDir/xtend-gen"
   }
 
   main {
@@ -188,7 +187,7 @@ dependencies {
 xtext {
   languages {
     melk {
-      fileExtension = 'melk'
+      fileExtensions = ['melk']
       setup = 'org.eclipse.elk.core.meta.MetaDataStandaloneSetup'
       generator.outlet.producesJava = true
     }
