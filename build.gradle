@@ -18,8 +18,8 @@
 plugins {
   // The documentation of the plugin [1] states "tested up to [gradle] 7.2". 
   // [1] https://xtext.github.io/xtext-gradle-plugin/xtext-builder.html
-  id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
-  id 'org.xtext.xtend'   version '3.0.2'
+  id 'org.xtext.builder' version '4.0.0'
+  id 'org.xtext.xtend'   version '4.0.0'
   id 'java'
 }
 
@@ -28,11 +28,12 @@ tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
 
-// GWT 2.10 allows to run Java [8, 17]
-//  (http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0)
-if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_8) 
-    || JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_18)) {
-    throw new GradleException("elkjs build requires to be run with Java [8, 17] (due to GWT compilation). You are running " + JavaVersion.current() + ".")
+// GWT 2.13 (released Feb 2025) runs on Java 11 through 21 and supports
+// Java 12-17 language features at the source/target level.
+// https://github.com/gwtproject/gwt/blob/main/RELEASE_NOTES.md
+if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_8)
+    || JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_22)) {
+    throw new GradleException("elkjs build requires to be run with Java [8, 21] (due to GWT compilation). You are running " + JavaVersion.current() + ".")
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -41,7 +42,7 @@ if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_8)
 
 ext.versions = [
   emfGwt: '2.12.4',
-  gwt:    '2.11.0',
+  gwt:    '2.13.0',
   guava:  '31.1-jre',
   melk:   '0.12.0-SNAPSHOT',
   xtext:  '2.36.0',
@@ -71,8 +72,7 @@ def elkSources = [
   "${elkRepo}/plugins/org.eclipse.elk.graph.json/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.common/src",
   // The algorithms
-  // FIXME: DisCo breaks Github Actions for unknown reasons, see https://github.com/kieler/elkjs/issues/291
-  //"${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
+  "${elkRepo}/plugins/org.eclipse.elk.alg.disco/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.force/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.layered/src",
   "${elkRepo}/plugins/org.eclipse.elk.alg.mrtree/src",
@@ -111,7 +111,7 @@ sourceSets {
     java {
       srcDirs = [ "$srcDir/elk" ]
     }
-    xtendOutputDir = "$srcDir/xtend-gen"
+    xtend.outputDir = "$srcDir/xtend-gen"
   }
 
   main {
@@ -187,7 +187,7 @@ dependencies {
 xtext {
   languages {
     melk {
-      fileExtension = 'melk'
+      fileExtensions = ['melk']
       setup = 'org.eclipse.elk.core.meta.MetaDataStandaloneSetup'
       generator.outlet.producesJava = true
     }
