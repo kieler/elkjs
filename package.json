@@ -8,6 +8,21 @@
   "description": "Automatic graph layout based on Sugiyama's algorithm. Specialized for data flow diagrams and ports.",
   "main": "lib/main",
   "types": "lib/main",
+  "exports": {
+    ".": {
+      "types": "./lib/main.d.ts",
+      "require": "./lib/main.js",
+      "default": "./lib/main.js"
+    },
+    "./wasm": {
+      "types": "./lib/wasm.d.ts",
+      "browser": "./lib/wasm.mjs",
+      "import": "./lib/wasm-node.mjs",
+      "default": "./lib/wasm.mjs"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib"
   ],
@@ -24,17 +39,26 @@
   ],
   "license": "EPL-2.0",
   "scripts": {
-    "test": "mocha test/mocha",
-    "gradle": "./gradlew lib",
+    "test": "npm run test:gwt && npm run test:common:gwt && npm run test:common:wasm && npm run test:wasm && npm run test:wasm:smoke && npm run test:wasm:react",
+    "test:gwt": "mocha test/mocha/gwt",
+    "test:common:gwt": "ELKJS_RUNTIME=gwt mocha test/mocha/common",
+    "test:common:wasm": "ELKJS_RUNTIME=wasm mocha test/mocha/common",
+    "test:wasm": "mocha test/mocha/wasm",
+    "test:wasm:smoke": "node test/smoke/run-wasm-layout-esm.mjs test/smoke/graph.json",
+    "test:wasm:react": "npm --prefix test/fixtures/vite-react install --no-package-lock && npm --prefix test/fixtures/vite-react run build",
+    "gradle": "./gradlew lib wasmLib",
     "babel": "babel src/js/ -d build/js/",
     "browserifyApi": "browserify build/js/main-api.js -s ELK --outfile lib/elk-api.js",
     "browserifyBundle": "browserify build/js/main-node.js -s ELK --outfile lib/elk.bundled.js",
     "browserify": "mkdirp lib && npm run browserifyApi && npm run browserifyBundle",
     "cp": "cp build/js/elk-worker*.js lib/ && cp build/js/main-node.js lib/main.js && cp typings/*.d.ts lib/",
     "js": "npm run babel && npm run browserify && npm run cp",
-    "build": "npm run gradle && npm run js",
+    "wasm:entrypoints": "node scripts/build-wasm-entrypoints.mjs",
+    "build": "npm run gradle && npm run js && npm run wasm:entrypoints",
     "clean": "./gradlew clean && rm -r lib",
-    "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\""
+    "setDevVersion": "npm version --no-git-tag-version \"$(node -p \"require('./package.json').version\")-dev-$(date '+%Y%m%d')\"",
+    "layoutEquality:buildShadowJar": "./gradlew layoutEqualitySmokeJar",
+    "layoutEquality": "node test/smoke/compare-layouts.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.4",
@@ -43,6 +67,7 @@
     "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
+    "esbuild": "^0.25.0",
     "mkdirp": "^0.5.0",
     "mocha": "^11.0.0",
     "web-worker": "1.4.1"
