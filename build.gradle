@@ -21,6 +21,7 @@ plugins {
   id 'org.xtext.builder' version '3.0.2' // according to the docu, tested up to gradle 7.2
   id 'org.xtext.xtend'   version '3.0.2'
   id 'java'
+  id 'org.teavm'         version '0.13.1'
 }
 
 // make sure all compile tasks use utf8
@@ -45,6 +46,7 @@ ext.versions = [
   guava:  '31.1-jre',
   melk:   '0.12.0-SNAPSHOT',
   xtext:  '2.36.0',
+  teavm:  '0.13.1',
 
   // From 2.26 on Xtext supports Java 17, however,
   //   "Xtext now supports running on Java 17 with Java 8 and 11 targets. Source and Target 17 are not supported yet".
@@ -93,6 +95,7 @@ def gwtModule = "org.eclipse.elk.js.ElkJs"
 
 repositories {
     jcenter()
+    mavenCentral()
     // for melk compiler
     maven {
         url 'https://central.sonatype.com/repository/maven-snapshots'
@@ -104,6 +107,12 @@ configurations {
 }
 
 sourceSets {
+  teavm {
+    java {
+      srcDirs = [ "$srcDir/elk", "$srcDir/melk", "$srcDir/xtend-gen", "src/wasm/java" ]
+    }
+  }
+
   // compile xtext related sources. This includes:
   // xtend -> java
   // melk -> java
@@ -119,7 +128,21 @@ sourceSets {
       srcDirs = [ srcDir ]
     }
   }
+
+  layoutEqualitySmoke {
+    java {
+      srcDirs = [ 'test/smoke', "${elkRepo}/plugins/org.eclipse.elk.graph.json/src", "$buildDir/xtend/layoutEqualitySmoke" ]
+      include 'LayoutDump.java'
+      include 'org/eclipse/elk/graph/json/**'
+    }
+
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
 }
+
+configurations.layoutEqualitySmokeImplementation.extendsFrom(configurations.implementation)
+configurations.layoutEqualitySmokeRuntimeOnly.extendsFrom(configurations.runtimeOnly)
 
 def gwtClasspath = [
       // gwt requires the folder structure to equal the package structure
@@ -181,7 +204,33 @@ dependencies {
   gwt "org.eclipse.xtext:org.eclipse.xtext.xbase.lib.gwt:$versions.xtext"
   gwt "org.eclipse.xtend:org.eclipse.xtend.lib.gwt:$versions.xtext"
 
+  teavmImplementation "org.teavm:teavm-interop:$versions.teavm"
+  teavmImplementation("org.teavm:teavm-jso:$versions.teavm") {
+    exclude group: 'org.teavm', module: 'teavm-classlib'
+  }
+  teavmImplementation("org.teavm:teavm-jso-apis:$versions.teavm") {
+    exclude group: 'org.teavm', module: 'teavm-classlib'
+  }
+  teavmImplementation('com.genmymodel.emf.gwt:emf-common:2.12.4') {
+    exclude group: 'org.gwtproject', module: 'gwt-user'
+    exclude group: 'org.gwtproject', module: 'gwt-dev'
+  }
+  teavmImplementation('com.genmymodel.emf.gwt:emf-ecore:2.12.4') {
+    exclude group: 'org.gwtproject', module: 'gwt-user'
+    exclude group: 'org.gwtproject', module: 'gwt-dev'
+  }
+  teavmImplementation "com.google.guava:guava:$versions.guava"
+  teavmImplementation "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+  teavmImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
+  teavmImplementation project(':teavm-classlib-patch')
+  teavmClasspath project(':teavm-classlib-patch')
+
+  layoutEqualitySmokeImplementation 'com.google.code.gson:gson:2.13.1'
 }
+
+configurations.teavmClasspath.exclude group: 'org.gwtproject', module: 'gwt-user'
+configurations.teavmClasspath.exclude group: 'org.gwtproject', module: 'gwt-dev'
+configurations.teavmClasspath.exclude group: 'org.teavm', module: 'teavm-classlib'
 
 // configure the melk language
 xtext {
@@ -196,6 +245,7 @@ xtext {
 
 // don't bother the xtext generator with irrelevant source sets
 generateXtext.enabled = false
+generateTeavmXtext.enabled = false
 
 clean {
   delete distDir
@@ -308,6 +358,66 @@ task copyMinified(type: Copy) {
 task lib(dependsOn: [ copyPretty, copyMinified ])
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//                         TeaVM Compilation
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+teavm {
+  all {
+    mainClass = 'org.eclipse.elk.js.WasmElkJs'
+    outputDir = layout.buildDirectory.dir('generated/teavm').get().asFile
+  }
+  wasmGC {
+    targetFileName = 'elkjs-wasm.wasm'
+  }
+}
+
+
+task copyWasmRuntime(type: Copy) {
+  from layout.buildDirectory.dir('generated/teavm/wasm-gc')
+  into 'lib/wasm'
+  include 'elkjs-wasm.wasm'
+}
+copyWasmRuntime.dependsOn buildWasmGC
+copyWasmRuntime.dependsOn copyWasmGCRuntime
+
+task copyWasmRuntimeModule {
+  dependsOn buildWasmGC
+
+  inputs.file(layout.buildDirectory.file('generated/teavm/wasm-gc/elkjs-wasm.wasm-runtime.js'))
+  outputs.file(file('lib/wasm/elkjs-wasm.wasm-runtime.mjs'))
+
+  doLast {
+    def sourceFile = layout.buildDirectory.file('generated/teavm/wasm-gc/elkjs-wasm.wasm-runtime.js').get().asFile
+    def targetFile = file('lib/wasm/elkjs-wasm.wasm-runtime.mjs')
+    targetFile.parentFile.mkdirs()
+    targetFile.text = sourceFile.getText('UTF-8') + '\nexport default TeaVM;\n'
+  }
+}
+
+task wasmLib(dependsOn: [ lib, buildWasmGC, copyWasmRuntime, copyWasmRuntimeModule ])
+
+task layoutEqualitySmokeJar(type: Jar) {
+  group = 'verification'
+  description = 'Build a standalone shaded jar to be used by the layout equality smoke test.'
+  dependsOn layoutEqualitySmokeClasses
+  archiveBaseName = 'layout-equality-smoke'
+  archiveClassifier = 'all'
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+  manifest {
+    attributes 'Main-Class': 'LayoutDump'
+  }
+
+  from {
+    sourceSets.layoutEqualitySmoke.runtimeClasspath.findAll { it.exists() }.collect { entry ->
+      entry.isDirectory() ? entry : zipTree(entry)
+    }
+  }
+
+  exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA'
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //                      Task Dependencies
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -316,7 +426,10 @@ generateXtextXtext.dependsOn copyEmul
 copyMelk.dependsOn generateXtextXtext
 compileJava.dependsOn copyMelk
 compileJava.dependsOn copyElkJs
+compileLayoutEqualitySmokeJava.dependsOn compileJava
+compileTeavmJava.dependsOn copyMelk
 gwtc.dependsOn compileJava
 gwtcMinified.dependsOn compileJava
 copyPretty.dependsOn gwtc
 copyMinified.dependsOn gwtcMinified
+generateWasmGC.dependsOn teavmClasses

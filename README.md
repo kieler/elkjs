@@ -132,6 +132,20 @@ const elk = new ELK({
 
 # Usage
 
+Since x.x.x the package includes an entry point 
+to use a wasm-based version of the library that is used as follows. For the legacy API, see below. 
+
+```js
+import { createELK } from 'elkjs/wasm'
+
+const elk = await createELK()
+const result = await elk.layout(graph);
+console.log(JSON.stringify(result));
+```
+
+[React/Vite Example](test/fixtures/vite-react/src/App.jsx).
+
+
 Since laying out diagrams can be a time-consuming job
 (even for the computer),
 and since we don't want to freeze your UI,
@@ -243,6 +257,7 @@ to construct it:
 Apart from that the `ELK` offers the following methods:
 * `layout(graph, options)`
   * `graph` - the graph to be laid out in [ELK JSON](http://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html). Mandatory!
+    The input graph is updated _in place_ and the resolved value is the same graph object.
   * `options` - a configuration object. Optional.
     * `layoutOptions`: its most important purpose is to pass _global_ layout options.
       That is, layout options that are applied to every graph element unless the element specifies the option itself.
