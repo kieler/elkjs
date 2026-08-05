@@ -46,7 +46,7 @@ ext.versions = [
   guava:  '31.1-jre',
   melk:   '0.13.0-SNAPSHOT',
   xtext:  '2.36.0',
-  teavm:  '0.13.1',
+  teavm:  '0.15.0',
 
   // From 2.26 on Xtext supports Java 17, however,
   //   "Xtext now supports running on Java 17 with Java 8 and 11 targets. Source and Target 17 are not supported yet".
