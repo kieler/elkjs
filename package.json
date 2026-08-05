@@ -1,6 +1,6 @@
 {
   "name": "elkjs",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "author": {
     "name": "Ulf Rüegg",
     "email": "uruurumail@gmail.com"
@@ -37,7 +37,7 @@
     "ports",
     "dataflow"
   ],
-  "license": "EPL-2.0",
+  "license": "EPL-2.0 OR GPL-3.0-or-later",
   "scripts": {
     "test": "npm run test:gwt && npm run test:common:gwt && npm run test:common:wasm && npm run test:wasm && npm run test:wasm:smoke && npm run test:wasm:react",
     "test:gwt": "mocha test/mocha/gwt",
