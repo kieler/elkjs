@@ -32,9 +32,9 @@ configurations.upstreamClasslib {
 
 dependencies {
   upstreamClasslib 'org.teavm:teavm-classlib:0.13.1'
-  compileOnly configurations.upstreamClasslib
-  testCompileOnly configurations.upstreamClasslib
-  testRuntimeOnly configurations.upstreamClasslib
+  compileOnly files(configurations.upstreamClasslib)
+  testCompileOnly files(configurations.upstreamClasslib)
+  testRuntimeOnly files(configurations.upstreamClasslib)
   implementation 'org.teavm:teavm-platform:0.13.1'
   implementation 'org.teavm:teavm-jso-apis:0.13.1'
   implementation 'org.teavm:teavm-jso-impl:0.13.1'
