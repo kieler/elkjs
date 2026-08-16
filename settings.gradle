@@ -1,0 +1,2 @@
+rootProject.name = 'elkjs'
+include 'teavm-classlib-patch'
