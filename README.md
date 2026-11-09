@@ -377,6 +377,7 @@ In the following a list of asorted links to other projects and sites that may pr
 - [capellambse-context-diagrams](https://github.com/DSD-DBS/capellambse-context-diagrams) - Generating systems engineering context diagrams for [Capella](https://www.eclipse.org/capella/) in Python
 - Used to layout the [dataflow viewer](https://github.com/vega/editor/pull/1023) in the [Vega Editor](https://vega.github.io/editor/#/)
 - [CatColab](https://catcolab.org/) - a collaborative environment for formal, interoperable, conceptual modeling
+- [JointJS](https://www.jointjs.com/) - Diagramming library for building complex, production-scale diagramming applications
 
 Note: We are happy to extend this list further, so please contact us if you have a project to add
 
